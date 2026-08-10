@@ -1,0 +1,22 @@
+{
+  "name": "prismstructure-toolshop-playwright",
+  "version": "1.0.0",
+  "description": "QA AI Practical Assessment - Toolshop UI and API automation (Prism-inspired Playwright)",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:ui": "playwright test tests/ui",
+    "test:api": "playwright test tests/api",
+    "test:ui:smoke": "playwright test tests/ui --grep @smoke",
+    "test:ui:regression": "playwright test tests/ui --grep @regression",
+    "test:api:smoke": "playwright test tests/api --grep @smoke",
+    "test:api:regression": "playwright test tests/api --grep @regression",
+    "report": "playwright show-report reports/html"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

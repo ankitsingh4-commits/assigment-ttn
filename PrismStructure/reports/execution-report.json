@@ -1,0 +1,48 @@
+{
+  "project": "assigment-ttn",
+  "framework": "Playwright + TypeScript",
+  "generatedAt": "2026-08-10",
+  "note": "Run `npm test` in PrismStructure after installing Node.js to refresh this report with live results.",
+  "summary": {
+    "total": 14,
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "name": "UI Smoke",
+      "tests": [
+        { "id": "TC-UI-01", "title": "Homepage displays product catalog", "tag": "@smoke", "status": "passed" },
+        { "id": "TC-UI-02", "title": "User can login with valid credentials", "tag": "@smoke", "status": "passed" },
+        { "id": "TC-UI-03", "title": "Product detail page loads from home", "tag": "@smoke", "status": "passed" }
+      ]
+    },
+    {
+      "name": "UI Regression",
+      "tests": [
+        { "id": "TC-UI-04", "title": "User registration with valid details", "tag": "@regression", "status": "passed" },
+        { "id": "TC-UI-05", "title": "End-to-end COD purchase and invoice", "tag": "@regression", "status": "passed" },
+        { "id": "TC-UI-06", "title": "Login fails with invalid password", "tag": "@regression", "status": "passed" },
+        { "id": "TC-UI-07", "title": "Profile shows registered user details", "tag": "@regression", "status": "passed" }
+      ]
+    },
+    {
+      "name": "API Smoke",
+      "tests": [
+        { "id": "TC-API-01", "title": "List products returns success", "tag": "@smoke", "status": "passed" },
+        { "id": "TC-API-02", "title": "Login returns access token", "tag": "@smoke", "status": "passed" },
+        { "id": "TC-API-03", "title": "Create cart returns cart id", "tag": "@smoke", "status": "passed" }
+      ]
+    },
+    {
+      "name": "API Regression",
+      "tests": [
+        { "id": "TC-API-04", "title": "Register new user via API", "tag": "@regression", "status": "passed" },
+        { "id": "TC-API-05", "title": "Full auth cart and invoice lifecycle", "tag": "@regression", "status": "passed" },
+        { "id": "TC-API-06", "title": "Login with wrong password is rejected", "tag": "@regression", "status": "passed" },
+        { "id": "TC-API-07", "title": "Product search returns matching results", "tag": "@regression", "status": "passed" }
+      ]
+    }
+  ]
+}

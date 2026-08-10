@@ -1,0 +1,13 @@
+{
+  "defaultUser": {
+    "email": "customer2@practicesoftwaretesting.com",
+    "password": "welcome01"
+  },
+  "billingAddress": {
+    "street": "Zoey Shore",
+    "city": "Hesselbury",
+    "state": "Florida",
+    "country": "United States",
+    "postalCode": "1234AA"
+  }
+}

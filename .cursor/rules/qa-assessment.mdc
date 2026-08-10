@@ -1,0 +1,10 @@
+You are assisting with the QA AI Practical Assessment for Practice Software Testing Toolshop.
+
+Rules:
+- Use Playwright with TypeScript and Page Object Model.
+- Prefer data-test selectors over CSS/XPath.
+- Keep assertions in spec files, not page objects.
+- Tag tests @smoke or @regression.
+- Limit each tier (manual/UI/API) to 5-8 test cases.
+- COD checkout requires double click on finish/confirm for invoice.
+- Document prompts in ai-prompts/ folder.

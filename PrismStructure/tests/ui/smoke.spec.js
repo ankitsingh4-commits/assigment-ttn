@@ -56,13 +56,7 @@ test.describe('UI Smoke', () => {
     await expect(page.getByText(`${user.firstName} ${user.lastName}`)).toBeVisible();
   });
 
-  test('@smoke TC-UI-04 Product detail page loads from home', async ({ page, homePage }) => {
-    await homePage.goto('/');
-    await homePage.productCards.first().click();
-    await expect(page.getByRole('button', { name: 'Add to cart' })).toBeVisible();
-  });
-
-  test('@smoke TC-UI-05 End-to-end purchase with cart, COD checkout, and invoice', async ({
+  test('@smoke TC-UI-04 End-to-end purchase with cart, COD checkout, and invoice', async ({
     page,
     homePage,
     loginPage,

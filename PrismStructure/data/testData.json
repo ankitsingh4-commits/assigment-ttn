@@ -23,7 +23,8 @@
   },
   "search": {
     "existingProduct": "hammer",
-    "uiProductTerm": "Thor Hammer"
+    "uiProductTerm": "Thor Hammer",
+    "noMatchTerm": "zzznoproductmatch999"
   },
   "billingAddress": {
     "street": "Zoey Shore",

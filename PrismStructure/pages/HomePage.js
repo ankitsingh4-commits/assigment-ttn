@@ -21,6 +21,10 @@ class HomePage extends BasePage {
     return this.page.locator('[data-test="search-submit"], button:has-text("Search")');
   }
 
+  get emptySearchResults() {
+    return this.page.getByText(/no products|no results|not found/i);
+  }
+
   async openSignIn() {
     await this.page.goto('/auth/login', { waitUntil: 'domcontentloaded' });
   }

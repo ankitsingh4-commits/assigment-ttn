@@ -112,6 +112,12 @@ class CheckoutPage {
     await this.paymentMethod.selectOption('cash-on-delivery');
   }
 
+  async confirmPaymentOnce() {
+    await expect(this.finishButton).toBeVisible();
+    await expect(this.finishButton).toBeEnabled();
+    await this.finishButton.click();
+  }
+
   async confirmPaymentTwice() {
     await expect(this.finishButton).toBeVisible();
     await expect(this.finishButton).toBeEnabled();

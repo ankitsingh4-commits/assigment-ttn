@@ -3,8 +3,18 @@ class CartPage {
     this.page = page;
   }
 
+  get cartTable() {
+    return this.page.getByRole('table').filter({
+      has: this.page.getByRole('columnheader', { name: 'Item' }),
+    });
+  }
+
   get lineItems() {
-    return this.page.locator('[data-test="product-title"], [data-test="product-name"]');
+    return this.cartTable.locator('tbody').first().getByRole('row');
+  }
+
+  get removeLineButtons() {
+    return this.lineItems.locator('td').last().locator('button, [role="button"]');
   }
 
   get lineItemQuantities() {
@@ -27,6 +37,14 @@ class CartPage {
 
   get proceedButton() {
     return this.page.locator('[data-test="proceed-1"]');
+  }
+
+  async clearCart() {
+    await this.page.goto('/checkout', { waitUntil: 'domcontentloaded' });
+
+    while (await this.removeLineButtons.count() > 0) {
+      await this.removeLineButtons.first().click();
+    }
   }
 
   async proceedToCheckout() {
@@ -57,6 +75,11 @@ class CartPage {
   }
 
   async getCartTotalText() {
+    const footerTotal = this.page.locator('table tbody tr').last().locator('td').last();
+    if (await footerTotal.isVisible()) {
+      return footerTotal.textContent();
+    }
+
     if (await this.cartTotal.count() > 0) {
       return this.cartTotal.textContent();
     }

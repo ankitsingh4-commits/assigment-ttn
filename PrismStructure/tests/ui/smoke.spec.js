@@ -58,6 +58,7 @@ test.describe('UI Smoke', () => {
 
   test('@smoke TC-UI-04 End-to-end purchase with cart, COD checkout, and invoice', async ({
     page,
+    request,
     homePage,
     loginPage,
     productPage,
@@ -67,7 +68,14 @@ test.describe('UI Smoke', () => {
     invoicePage,
   }) => {
     test.setTimeout(120000);
-    const user = getDefaultUser();
+    const user = uniqueRegisterUser();
+    const authApi = new AuthApi(request);
+    const { response } = await authApi.register(user.email, user.password, {
+      first_name: user.firstName,
+      last_name: user.lastName,
+    });
+    expect(response.status()).toBe(201);
+
     const { billingAddress, search } = getTestData();
     const updatedQuantity = 3;
 
@@ -81,22 +89,24 @@ test.describe('UI Smoke', () => {
 
     await homePage.goto('/');
     await homePage.searchProducts(search.uiProductTerm);
-    await expect(homePage.productCards.first()).toBeVisible();
-    await homePage.openProductCard(0);
+    await expect(homePage.productCards.filter({ hasText: /Claw Hammer/i }).first()).toBeVisible();
+    await homePage.openProductByName(/Claw Hammer/i);
     await expect(productPage.addToCartButton).toBeVisible();
     await productPage.addToCart(2);
-    await expect(page.getByText(/added to (shopping )?cart/i)).toBeVisible();
+    await expect(page.getByRole('alert', { name: /added to.*shopping cart/i })).toBeVisible();
 
     await homePage.goto('/');
     await homePage.searchProducts(search.existingProduct);
-    await expect(homePage.productCards.first()).toBeVisible();
-    await homePage.openProductCard(0);
+    await expect(homePage.productCards.filter({ hasText: search.existingProduct }).first()).toBeVisible();
+    await homePage.openProductByName(search.existingProduct);
     await productPage.addToCart(1);
-    await expect(page.getByText(/added to (shopping )?cart/i)).toBeVisible();
+    await expect(page.getByRole('alert', { name: /added to.*shopping cart/i })).toBeVisible();
 
     await navBar.openCart();
+    await expect(cartPage.lineItems.first()).toBeVisible();
     await expect(cartPage.lineItems).toHaveCount(2);
     await cartPage.updateLineItemQuantity(0, updatedQuantity);
+    await expect(page.getByRole('alert', { name: /quantity updated/i })).toBeVisible();
     await expect(cartPage.lineItemQuantities.nth(0)).toHaveValue(String(updatedQuantity));
 
     const firstUnitPrice = parsePrice(await cartPage.getLineItemUnitPrice(0));
@@ -120,10 +130,8 @@ test.describe('UI Smoke', () => {
     await checkoutPage.selectCashOnDelivery();
     await checkoutPage.confirmPaymentTwice();
 
-    await expect(checkoutPage.orderComplete).toBeVisible();
-
     await navBar.openMyInvoices();
-    await expect(invoicePage.invoiceNumbers.first()).toBeVisible();
+    await expect(invoicePage.invoiceNumbers.first()).toBeVisible({ timeout: 15000 });
     const invoicesAfterCheckout = await invoicePage.countInvoices();
     expect(invoicesAfterCheckout).toBeGreaterThan(invoicesBeforeCheckout);
     await expect(invoicePage.invoiceNumbers.first()).not.toBeEmpty();

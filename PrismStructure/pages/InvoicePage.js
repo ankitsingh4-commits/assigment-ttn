@@ -4,11 +4,11 @@ class InvoicePage {
   }
 
   get invoiceNumbers() {
-    return this.page.locator('[data-test="invoice-number"]');
+    return this.page.getByRole('cell').filter({ hasText: /^INV-/ });
   }
 
   get invoiceRows() {
-    return this.page.locator('[data-test="invoice-number"]');
+    return this.page.getByRole('row').filter({ has: this.page.getByRole('link', { name: 'Details' }) });
   }
 
   async countInvoices() {

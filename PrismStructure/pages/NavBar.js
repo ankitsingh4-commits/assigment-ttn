@@ -28,8 +28,11 @@ class NavBar {
   }
 
   async openMyInvoices() {
-    await this.profileMenu.click();
-    await this.myInvoicesLink.click();
+    await this.page.goto('/account/invoices', { waitUntil: 'domcontentloaded' });
+    const invoicesTab = this.page.getByRole('button', { name: 'Invoices', exact: true });
+    if (await invoicesTab.isVisible()) {
+      await invoicesTab.click();
+    }
   }
 
   async openMyProfile() {

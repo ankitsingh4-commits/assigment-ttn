@@ -10,7 +10,7 @@ class HomePage extends BasePage {
   }
 
   get productCards() {
-    return this.page.locator('[data-test="product-name"], a[href*="/product/"]');
+    return this.page.locator('[data-test="product-name"]');
   }
 
   get searchInput() {
@@ -40,6 +40,10 @@ class HomePage extends BasePage {
 
   async openProductCard(index = 0) {
     await this.productCards.nth(index).click();
+  }
+
+  async openProductByName(name) {
+    await this.productCards.filter({ hasText: name }).first().click();
   }
 }
 

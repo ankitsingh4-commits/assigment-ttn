@@ -22,8 +22,8 @@
     "wrongPassword": "WrongPass123!"
   },
   "search": {
-    "existingProduct": "hammer",
-    "uiProductTerm": "Thor Hammer",
+    "existingProduct": "Thor Hammer",
+    "uiProductTerm": "Claw Hammer",
     "noMatchTerm": "zzznoproductmatch999"
   },
   "billingAddress": {
@@ -31,7 +31,7 @@
     "city": "Hesselbury",
     "state": "Florida",
     "country": "United States of America (the)",
-    "postalCode": "1234AA",
+    "postalCode": "32801",
     "houseNumber": "42"
   },
   "apiRegister": {

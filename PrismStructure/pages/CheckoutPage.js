@@ -45,8 +45,12 @@ class CheckoutPage {
     return this.page.locator('[data-test="finish"]');
   }
 
+  get confirmButton() {
+    return this.page.getByRole('button', { name: /^Confirm$/ });
+  }
+
   get orderComplete() {
-    return this.page.getByText('Thanks for your order');
+    return this.page.getByText(/Thanks for your order/i);
   }
 
   async continueCheckoutWizard() {
@@ -56,14 +60,19 @@ class CheckoutPage {
   }
 
   async clickVisibleProceed() {
-    const count = await this.proceedButton.count();
-    for (let i = 0; i < count; i++) {
-      const button = this.proceedButton.nth(i);
-      if (await button.isVisible()) {
-        await button.click();
-        return;
+    const candidates = [this.proceedButton, this.proceedToCheckoutButton];
+
+    for (const locator of candidates) {
+      const count = await locator.count();
+      for (let i = 0; i < count; i++) {
+        const button = locator.nth(i);
+        if (await button.isVisible()) {
+          await button.click();
+          return;
+        }
       }
     }
+
     throw new Error('No visible proceed button found on checkout wizard');
   }
 
@@ -96,7 +105,11 @@ class CheckoutPage {
   }
 
   async goToPaymentStep() {
-    await this.page.getByText('Payment', { exact: true }).click();
+    if (await this.paymentMethod.isVisible()) {
+      return;
+    }
+
+    await this.page.getByRole('listitem').filter({ hasText: /^Payment$/ }).click();
   }
 
   async advanceFromSignInStep() {
@@ -113,18 +126,23 @@ class CheckoutPage {
   }
 
   async confirmPaymentOnce() {
-    await expect(this.finishButton).toBeVisible();
-    await expect(this.finishButton).toBeEnabled();
-    await this.finishButton.click();
+    await expect(this.confirmButton).toBeVisible();
+    await expect(this.confirmButton).toBeEnabled();
+    await this.confirmButton.click();
   }
 
   async confirmPaymentTwice() {
-    await expect(this.finishButton).toBeVisible();
-    await expect(this.finishButton).toBeEnabled();
-    await this.finishButton.click();
-    await expect(this.finishButton).toBeVisible();
-    await expect(this.finishButton).toBeEnabled();
-    await this.finishButton.click();
+    await expect(this.confirmButton).toBeVisible();
+    await expect(this.confirmButton).toBeEnabled();
+    await this.confirmButton.click();
+
+    await expect(this.page.getByText(/Payment was successful/i)).toBeVisible({ timeout: 15000 });
+
+    await expect(this.confirmButton).toBeVisible();
+    await expect(this.confirmButton).toBeEnabled();
+    await this.confirmButton.click({ force: true });
+
+    await expect(this.orderComplete).toBeVisible({ timeout: 20000 });
   }
 }
 

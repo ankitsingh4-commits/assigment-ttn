@@ -11,6 +11,10 @@ class InvoiceApi {
     return this.client.post('/invoices', payload, token);
   }
 
+  async createInvoiceWithPayload(payload, token) {
+    return this.client.post('/invoices', payload, token);
+  }
+
   async getInvoice(invoiceId, token) {
     return this.client.get(`/invoices/${invoiceId}`, token);
   }

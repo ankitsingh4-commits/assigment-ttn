@@ -2,27 +2,22 @@ const { test, expect } = require('@playwright/test');
 const { ToolshopFlow } = require('../../api/ToolshopFlow');
 const { ProductApi } = require('../../api/ProductApi');
 const { getTestData } = require('../../utils/env');
+const { invoicePayload } = require('../../utils/dataGenerator');
 const {
-  expectUserResponse,
+  invalidResourceId,
   expectTokenResponse,
   expectCartItemAdded,
   expectCartContainsProducts,
   expectCodInvoiceCreated,
   expectCodInvoiceDetails,
   expectPaginatedProducts,
+  expectUnauthorized,
+  expectNotFound,
+  expectValidationErrors,
 } = require('../../utils/apiAssertions');
 
 test.describe('API Regression', () => {
-  test('@regression TC-API-04 Register new user via API', async ({ request }) => {
-    const flow = new ToolshopFlow(request);
-    const { response, payload } = await flow.registerUniqueUser();
-
-    expect(response.status()).toBe(201);
-    const body = await response.json();
-    expectUserResponse(body, payload);
-  });
-
-  test('@regression TC-API-05 Full auth cart and invoice lifecycle', async ({ request }) => {
+  test('@regression TC-API-04 Full auth cart and invoice lifecycle', async ({ request }) => {
     const flow = new ToolshopFlow(request);
 
     const { response: registerResponse, email, password, payload } =
@@ -86,7 +81,9 @@ test.describe('API Regression', () => {
     expect(payload.password).toBe(password);
   });
 
-  test('@regression TC-API-06 Login with wrong password is rejected', async ({ request }) => {
+  test('@regression TC-API-05 Invalid login is rejected with unauthorized response', async ({
+    request,
+  }) => {
     const flow = new ToolshopFlow(request);
     const { invalidCredentials } = getTestData();
 
@@ -94,28 +91,104 @@ test.describe('API Regression', () => {
     const { response: validLogin } = await flow.login(email, password);
     expect(validLogin.status()).toBe(200);
 
-    const { response: invalidLogin } = await flow.login(
+    const { response: invalidLogin, body: errorBody } = await flow.login(
       email,
       invalidCredentials.wrongPassword,
     );
-    expect(invalidLogin.status()).toBe(401);
-
-    const errorBody = await invalidLogin.json();
-    expect(errorBody.access_token).toBeUndefined();
+    expectUnauthorized(invalidLogin, errorBody);
   });
 
-  test('@regression TC-API-07 Product search returns matching results', async ({ request }) => {
-    const { search } = getTestData();
-    const productApi = new ProductApi(request);
-    const response = await productApi.search(search.existingProduct);
+  test('@regression TC-API-06 Invoice creation rejects missing and invalid bearer tokens', async ({
+    request,
+  }) => {
+    const flow = new ToolshopFlow(request);
 
-    expect(response.status()).toBe(200);
-    const body = await response.json();
-    expectPaginatedProducts(body);
+    const { email, password } = await flow.registerUniqueUser();
+    const { body: loginBody } = await flow.login(email, password);
+    const token = loginBody.access_token;
 
-    const match = body.data.find((product) =>
-      product.name.toLowerCase().includes(search.existingProduct.toLowerCase()),
+    const cartResponse = await flow.createCart(token);
+    const cart = await cartResponse.json();
+    const payload = invoicePayload(cart.id);
+
+    const missingTokenResponse = await flow.createInvoiceWithPayload(payload);
+    const missingTokenBody = await missingTokenResponse.json();
+    expectUnauthorized(missingTokenResponse, missingTokenBody);
+
+    const invalidTokenResponse = await flow.createInvoiceWithPayload(
+      payload,
+      'invalid-bearer-token',
     );
-    expect(match).toBeTruthy();
+    const invalidTokenBody = await invalidTokenResponse.json();
+    expectUnauthorized(invalidTokenResponse, invalidTokenBody);
+  });
+
+  test('@regression TC-API-07 Invalid cart and product IDs return not found', async ({
+    request,
+  }) => {
+    const flow = new ToolshopFlow(request);
+    const productApi = new ProductApi(request);
+    const invalidId = invalidResourceId();
+
+    const { email, password } = await flow.registerUniqueUser();
+    const { body: loginBody } = await flow.login(email, password);
+    const token = loginBody.access_token;
+
+    const productsBody = await (await flow.listProducts()).json();
+    const validProductId = productsBody.data[0].id;
+
+    const invalidCartResponse = await flow.getCart(invalidId, token);
+    const invalidCartBody = await invalidCartResponse.json();
+    expectNotFound(invalidCartResponse, invalidCartBody);
+
+    const invalidProductResponse = await productApi.getProduct(invalidId);
+    const invalidProductBody = await invalidProductResponse.json();
+    expectNotFound(invalidProductResponse, invalidProductBody);
+
+    const addToInvalidCartResponse = await flow.addProductToCart(
+      invalidId,
+      validProductId,
+      1,
+      token,
+    );
+    const addToInvalidCartBody = await addToInvalidCartResponse.json();
+    expectNotFound(addToInvalidCartResponse, addToInvalidCartBody);
+    expect(addToInvalidCartBody.message).toMatch(/cart not found/i);
+
+    const validCart = await (await flow.createCart(token)).json();
+    const addInvalidProductResponse = await flow.addProductToCart(
+      validCart.id,
+      invalidId,
+      1,
+      token,
+    );
+    const addInvalidProductBody = await addInvalidProductResponse.json();
+    expectNotFound(addInvalidProductResponse, addInvalidProductBody);
+  });
+
+  test('@regression TC-API-08 Invoice with missing required fields returns validation errors', async ({
+    request,
+  }) => {
+    const flow = new ToolshopFlow(request);
+
+    const { email, password } = await flow.registerUniqueUser();
+    const { body: loginBody } = await flow.login(email, password);
+    const token = loginBody.access_token;
+
+    const incompletePayload = {
+      payment_method: 'cash-on-delivery',
+      payment_details: {},
+    };
+
+    const response = await flow.createInvoiceWithPayload(incompletePayload, token);
+    const body = await response.json();
+    expectValidationErrors(response, body, [
+      'billing_street',
+      'billing_city',
+      'billing_country',
+      'cart_id',
+    ]);
+    expect(body.id).toBeUndefined();
+    expect(body.invoice_number).toBeUndefined();
   });
 });

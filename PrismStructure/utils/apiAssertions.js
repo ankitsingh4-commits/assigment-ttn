@@ -104,7 +104,32 @@ function expectCodInvoiceDetails(body, invoiceRequest, expectedLineCount) {
   });
 }
 
+function invalidResourceId() {
+  return '01INVALID00000000000000000000';
+}
+
+function expectUnauthorized(response, body) {
+  expect(response.status()).toBe(401);
+  const errorText = body.message ?? body.error;
+  expect(errorText).toEqual(expect.any(String));
+  expect(body.access_token).toBeUndefined();
+}
+
+function expectNotFound(response, body) {
+  expect(response.status()).toBe(404);
+  expect(body.message).toEqual(expect.any(String));
+}
+
+function expectValidationErrors(response, body, fields) {
+  expect(response.status()).toBe(422);
+  fields.forEach((field) => {
+    expect(body[field]).toEqual(expect.any(Array));
+    expect(body[field].length).toBeGreaterThan(0);
+  });
+}
+
 module.exports = {
+  invalidResourceId,
   expectPaginatedProducts,
   expectTokenResponse,
   expectUserResponse,
@@ -114,4 +139,7 @@ module.exports = {
   expectCartContainsProducts,
   expectCodInvoiceCreated,
   expectCodInvoiceDetails,
+  expectUnauthorized,
+  expectNotFound,
+  expectValidationErrors,
 };

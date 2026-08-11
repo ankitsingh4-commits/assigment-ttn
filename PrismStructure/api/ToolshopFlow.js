@@ -57,6 +57,10 @@ class ToolshopFlow {
     return { response, payload };
   }
 
+  async createInvoiceWithPayload(payload, token) {
+    return this.invoiceApi.createInvoiceWithPayload(payload, token);
+  }
+
   async getInvoice(invoiceId, token) {
     return this.invoiceApi.getInvoice(invoiceId, token);
   }

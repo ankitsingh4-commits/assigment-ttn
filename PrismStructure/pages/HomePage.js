@@ -13,12 +13,29 @@ class HomePage extends BasePage {
     return this.page.locator('[data-test="product-name"], a[href*="/product/"]');
   }
 
+  get searchInput() {
+    return this.page.locator('[data-test="search-query"], input[placeholder*="Search"]');
+  }
+
+  get searchButton() {
+    return this.page.locator('[data-test="search-submit"], button:has-text("Search")');
+  }
+
   async openSignIn() {
     await this.page.goto('/auth/login', { waitUntil: 'domcontentloaded' });
   }
 
   async openRegister() {
     await this.page.goto('/auth/register', { waitUntil: 'domcontentloaded' });
+  }
+
+  async searchProducts(term) {
+    await this.searchInput.first().fill(term);
+    await this.searchButton.first().click();
+  }
+
+  async openProductCard(index = 0) {
+    await this.productCards.nth(index).click();
   }
 }
 

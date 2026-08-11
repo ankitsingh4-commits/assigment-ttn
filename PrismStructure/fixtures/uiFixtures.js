@@ -7,6 +7,7 @@ const { CartPage } = require('../pages/CartPage');
 const { CheckoutPage } = require('../pages/CheckoutPage');
 const { ProfilePage } = require('../pages/ProfilePage');
 const { NavBar } = require('../pages/NavBar');
+const { InvoicePage } = require('../pages/InvoicePage');
 
 const test = base.extend({
   homePage: async ({ page }, use) => {
@@ -32,6 +33,9 @@ const test = base.extend({
   },
   navBar: async ({ page }, use) => {
     await use(new NavBar(page));
+  },
+  invoicePage: async ({ page }, use) => {
+    await use(new InvoicePage(page));
   },
 });
 

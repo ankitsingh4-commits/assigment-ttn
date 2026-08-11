@@ -99,6 +99,13 @@ class CheckoutPage {
     await this.page.getByText('Payment', { exact: true }).click();
   }
 
+  async advanceFromSignInStep() {
+    const signInHeading = this.page.getByRole('heading', { name: 'Sign in' });
+    if (await signInHeading.isVisible()) {
+      await this.clickVisibleProceed();
+    }
+  }
+
   async selectCashOnDelivery() {
     await this.goToPaymentStep();
     await expect(this.paymentMethod).toBeVisible();
@@ -106,7 +113,11 @@ class CheckoutPage {
   }
 
   async confirmPaymentTwice() {
+    await expect(this.finishButton).toBeVisible();
+    await expect(this.finishButton).toBeEnabled();
     await this.finishButton.click();
+    await expect(this.finishButton).toBeVisible();
+    await expect(this.finishButton).toBeEnabled();
     await this.finishButton.click();
   }
 }

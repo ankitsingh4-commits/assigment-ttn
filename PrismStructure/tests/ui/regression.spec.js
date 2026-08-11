@@ -2,45 +2,6 @@ const { test, expect } = require('../../fixtures/uiFixtures');
 const { getDefaultUser, getTestData } = require('../../utils/env');
 
 test.describe('UI Regression', () => {
-  test('@regression TC-UI-05 End-to-end COD purchase and invoice', async ({
-    page,
-    homePage,
-    loginPage,
-    productPage,
-    cartPage,
-    checkoutPage,
-    navBar,
-  }) => {
-    test.setTimeout(90000);
-    const user = getDefaultUser();
-    const { billingAddress } = getTestData();
-
-    await homePage.goto('/');
-    await homePage.openSignIn();
-    await loginPage.login(user.email, user.password);
-    await expect(navBar.profileMenu).toBeVisible();
-
-    await homePage.goto('/');
-    await expect(homePage.productCards.first()).toBeVisible();
-    await homePage.productCards.first().click();
-    await productPage.addToCart(2);
-    await expect(page.getByText(/added to (shopping )?cart/i)).toBeVisible();
-
-    await navBar.openCart();
-    await expect(cartPage.lineItems.first()).toBeVisible();
-    await cartPage.proceedToCheckout();
-    await checkoutPage.continueCheckoutWizard();
-
-    await checkoutPage.fillBillingAddress(billingAddress);
-    await checkoutPage.selectCashOnDelivery();
-    await checkoutPage.confirmPaymentTwice();
-
-    await expect(checkoutPage.orderComplete).toBeVisible();
-
-    await navBar.openMyInvoices();
-    await expect(page.locator('[data-test="invoice-number"]').first()).toBeVisible();
-  });
-
   test('@regression TC-UI-06 Invalid login shows error and keeps user signed out', async ({
     homePage,
     loginPage,

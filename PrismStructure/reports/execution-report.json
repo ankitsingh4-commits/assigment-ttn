@@ -4,11 +4,8 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "tests/ui",
       "--grep",
-      "@smoke",
-      "--grep",
-      "TC-UI-04"
+      "@smoke"
     ],
     "configFile": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\playwright.config.js",
     "rootDir": "C:/Users/Ankit Singh/Projects/assigment-ttn/PrismStructure/tests",
@@ -77,6 +74,131 @@
   },
   "suites": [
     {
+      "title": "api\\smoke.spec.js",
+      "file": "api/smoke.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Smoke",
+          "file": "api/smoke.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "@smoke TC-API-01 List products returns paginated catalog",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 711,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:17:33.367Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b95780aae95a72f9c91-b2cd601136a2227c73dd",
+              "file": "api/smoke.spec.js",
+              "line": 10,
+              "column": 3
+            },
+            {
+              "title": "@smoke TC-API-02 Register and login returns bearer token",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1367,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:17:34.140Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b95780aae95a72f9c91-831f54350aa8f75b38d8",
+              "file": "api/smoke.spec.js",
+              "line": 19,
+              "column": 3
+            },
+            {
+              "title": "@smoke TC-API-03 Authenticated user can create a cart",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1975,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:17:35.529Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b95780aae95a72f9c91-38808883fa8e2a8497b7",
+              "file": "api/smoke.spec.js",
+              "line": 34,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "ui\\smoke.spec.js",
       "file": "ui/smoke.spec.js",
       "column": 0,
@@ -89,6 +211,114 @@
           "line": 7,
           "column": 6,
           "specs": [
+            {
+              "title": "@smoke TC-UI-01 Homepage displays product catalog",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8101,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:17:37.590Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "59fcd4be272445633d23-99a8ffd5d7cd5ed1c0b1",
+              "file": "ui/smoke.spec.js",
+              "line": 8,
+              "column": 3
+            },
+            {
+              "title": "@smoke TC-UI-02 User can register with valid credentials",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8991,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:17:46.061Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "59fcd4be272445633d23-e7fac9dd8fdb154a750b",
+              "file": "ui/smoke.spec.js",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "@smoke TC-UI-03 User can login with valid credentials",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6772,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:17:55.090Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "59fcd4be272445633d23-9ced91b5a92ccb83c838",
+              "file": "ui/smoke.spec.js",
+              "line": 33,
+              "column": 3
+            },
             {
               "title": "@smoke TC-UI-04 End-to-end purchase with cart, COD checkout, and invoice",
               "ok": true,
@@ -107,12 +337,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 35797,
+                      "duration": 28942,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:02:07.005Z",
+                      "startTime": "2026-08-11T12:18:01.906Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -132,9 +362,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-11T12:02:03.684Z",
-    "duration": 69461.753,
-    "expected": 1,
+    "startTime": "2026-08-11T12:17:31.824Z",
+    "duration": 59511.579,
+    "expected": 7,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

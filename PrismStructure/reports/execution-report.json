@@ -4,8 +4,11 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\node_modules\\@playwright\\test\\cli.js",
       "test",
+      "tests/ui",
       "--grep",
-      "@smoke"
+      "@smoke",
+      "--grep",
+      "TC-UI-04"
     ],
     "configFile": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\playwright.config.js",
     "rootDir": "C:/Users/Ankit Singh/Projects/assigment-ttn/PrismStructure/tests",
@@ -74,131 +77,6 @@
   },
   "suites": [
     {
-      "title": "api\\smoke.spec.js",
-      "file": "api/smoke.spec.js",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "API Smoke",
-          "file": "api/smoke.spec.js",
-          "line": 9,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@smoke TC-API-01 List products returns paginated catalog",
-              "ok": true,
-              "tags": [
-                "smoke"
-              ],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 799,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-11T11:26:35.315Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3b95780aae95a72f9c91-b2cd601136a2227c73dd",
-              "file": "api/smoke.spec.js",
-              "line": 10,
-              "column": 3
-            },
-            {
-              "title": "@smoke TC-API-02 Register and login returns bearer token",
-              "ok": true,
-              "tags": [
-                "smoke"
-              ],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1546,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-11T11:26:36.182Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3b95780aae95a72f9c91-831f54350aa8f75b38d8",
-              "file": "api/smoke.spec.js",
-              "line": 19,
-              "column": 3
-            },
-            {
-              "title": "@smoke TC-API-03 Authenticated user can create a cart",
-              "ok": true,
-              "tags": [
-                "smoke"
-              ],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2550,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-11T11:26:37.747Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3b95780aae95a72f9c91-38808883fa8e2a8497b7",
-              "file": "api/smoke.spec.js",
-              "line": 34,
-              "column": 3
-            }
-          ]
-        }
-      ]
-    },
-    {
       "title": "ui\\smoke.spec.js",
       "file": "ui/smoke.spec.js",
       "column": 0,
@@ -212,116 +90,8 @@
           "column": 6,
           "specs": [
             {
-              "title": "@smoke TC-UI-01 Homepage displays product catalog",
-              "ok": true,
-              "tags": [
-                "smoke"
-              ],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 6224,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-11T11:26:40.342Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "59fcd4be272445633d23-99a8ffd5d7cd5ed1c0b1",
-              "file": "ui/smoke.spec.js",
-              "line": 8,
-              "column": 3
-            },
-            {
-              "title": "@smoke TC-UI-02 User can register with valid credentials",
-              "ok": true,
-              "tags": [
-                "smoke"
-              ],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 10816,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-11T11:26:47.813Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "59fcd4be272445633d23-e7fac9dd8fdb154a750b",
-              "file": "ui/smoke.spec.js",
-              "line": 13,
-              "column": 3
-            },
-            {
-              "title": "@smoke TC-UI-03 User can login with valid credentials",
-              "ok": true,
-              "tags": [
-                "smoke"
-              ],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 7365,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-11T11:26:58.691Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "59fcd4be272445633d23-9ced91b5a92ccb83c838",
-              "file": "ui/smoke.spec.js",
-              "line": 33,
-              "column": 3
-            },
-            {
               "title": "@smoke TC-UI-04 End-to-end purchase with cart, COD checkout, and invoice",
-              "ok": false,
+              "ok": true,
               "tags": [
                 "smoke"
               ],
@@ -336,121 +106,18 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 23265,
-                      "error": {
-                        "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'My invoices' })\u001b[22m\n",
-                        "stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'My invoices' })\u001b[22m\n\n    at NavBar.openMyInvoices (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js:32:31)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\smoke.spec.js:79:5",
-                        "location": {
-                          "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js",
-                          "column": 31,
-                          "line": 32
-                        },
-                        "snippet": "   at ..\\pages\\NavBar.js:32\n\n  30 |   async openMyInvoices() {\n  31 |     await this.profileMenu.click();\n> 32 |     await this.myInvoicesLink.click();\n     |                               ^\n  33 |   }\n  34 |\n  35 |   async openMyProfile() {"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js",
-                            "column": 31,
-                            "line": 32
-                          },
-                          "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'My invoices' })\u001b[22m\n\n\n   at ..\\pages\\NavBar.js:32\n\n  30 |   async openMyInvoices() {\n  31 |     await this.profileMenu.click();\n> 32 |     await this.myInvoicesLink.click();\n     |                               ^\n  33 |   }\n  34 |\n  35 |   async openMyProfile() {\n    at NavBar.openMyInvoices (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js:32:31)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\smoke.spec.js:79:5"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 35797,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T11:27:06.123Z",
+                      "startTime": "2026-08-11T12:02:07.005Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium\\test-failed-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium\\video.webm"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium\\error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium\\trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js",
-                        "column": 31,
-                        "line": 32
-                      }
-                    },
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 24610,
-                      "error": {
-                        "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'My invoices' })\u001b[22m\n",
-                        "stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'My invoices' })\u001b[22m\n\n    at NavBar.openMyInvoices (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js:32:31)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\smoke.spec.js:79:5",
-                        "location": {
-                          "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js",
-                          "column": 31,
-                          "line": 32
-                        },
-                        "snippet": "   at ..\\pages\\NavBar.js:32\n\n  30 |   async openMyInvoices() {\n  31 |     await this.profileMenu.click();\n> 32 |     await this.myInvoicesLink.click();\n     |                               ^\n  33 |   }\n  34 |\n  35 |   async openMyProfile() {"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js",
-                            "column": 31,
-                            "line": 32
-                          },
-                          "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'My invoices' })\u001b[22m\n\n\n   at ..\\pages\\NavBar.js:32\n\n  30 |   async openMyInvoices() {\n  31 |     await this.profileMenu.click();\n> 32 |     await this.myInvoicesLink.click();\n     |                               ^\n  33 |   }\n  34 |\n  35 |   async openMyProfile() {\n    at NavBar.openMyInvoices (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js:32:31)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\smoke.spec.js:79:5"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 1,
-                      "startTime": "2026-08-11T11:27:32.607Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium-retry1\\test-failed-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium-retry1\\video.webm"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium-retry1\\error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-smoke-UI-Smoke-smoke-TC-4d8b8-rt-COD-checkout-and-invoice-chromium-retry1\\trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\NavBar.js",
-                        "column": 31,
-                        "line": 32
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "59fcd4be272445633d23-5c0bb8e3cea1a46fbcd9",
@@ -465,11 +132,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-11T11:26:33.671Z",
-    "duration": 86522.732,
-    "expected": 6,
+    "startTime": "2026-08-11T12:02:03.684Z",
+    "duration": 69461.753,
+    "expected": 1,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   }
 }

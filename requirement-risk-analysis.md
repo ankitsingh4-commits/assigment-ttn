@@ -132,9 +132,22 @@ Toolshop’s core business value is enabling a registered user to discover produ
 
 | Scenario | Risk if untested | Coverage |
 |----------|------------------|----------|
-| Missing billing fields (negative) | Invalid orders slip through | Manual (TC-MAN-12) |
+| Missing billing fields (negative) | Invalid orders slip through | Manual (TC-MAN-08) |
 | Credit card path (alternate) | Payment regression if COD-only scope | Out of scope |
 | Browser back during checkout (edge) | Duplicate or lost order state | Manual |
+
+---
+
+## 6b. Billing address validation
+
+| Field | Detail |
+|-------|--------|
+| **Requirement / AC** | Checkout cannot proceed when required billing fields (street, city, state, country, postal code) are empty or invalid. |
+| **Business risk** | Invalid address data causes fulfillment failures and bad orders in the system. |
+| **Failure impact** | Orders with incomplete billing may fail downstream or require manual correction. |
+| **Testing priority** | **P1 — High** |
+| **Recommended coverage** | **UI:** leave billing fields empty and attempt proceed (TC-MAN-08). |
+| **Classification** | **Regression** |
 
 ---
 
@@ -146,7 +159,7 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | **Assessment-critical edge case** — single confirm may leave order incomplete without invoice. |
 | **Failure impact** | User believes order succeeded but **no invoice** appears under My Invoices; support and reconciliation gaps. |
 | **Testing priority** | **P0 — Critical** |
-| **Recommended coverage** | **UI:** `confirmPaymentTwice()` in automation (TC-UI-05). **Manual:** single-confirm negative (TC-MAN-10). |
+| **Recommended coverage** | **UI:** `confirmPaymentTwice()` in automation (TC-UI-05). **Manual:** single-confirm edge (TC-MAN-07). |
 | **Classification** | **Regression** (edge behavior; must be in E2E) |
 
 ---
@@ -174,18 +187,19 @@ Toolshop’s core business value is enabling a registered user to discover produ
 
 ## Traceability matrix
 
-| Flow | Requirement ID | Priority | Smoke | Regression | UI test | API test |
-|------|----------------|----------|-------|------------|---------|----------|
-| Registration | REQ-REG-01 | P1 | — | ✓ | TC-UI-04 | TC-API-04 |
-| Login (valid) | REQ-AUTH-01 | P0 | ✓ | — | TC-UI-02 | TC-API-02 |
-| Login (invalid) | REQ-AUTH-02 | P1 | — | ✓ | TC-UI-06 | TC-API-06 |
-| Profile | REQ-PROF-01 | P1 | — | ✓ | TC-UI-07 | — |
-| Catalog browse | REQ-CAT-01 | P2 | ✓ | — | TC-UI-01, 03 | TC-API-01 |
-| Product search | REQ-CAT-02 | P1 | — | ✓ | Manual | TC-API-07 |
-| Cart / quantity | REQ-CART-01 | P0 | — | ✓ | TC-UI-05 | TC-API-03, 05 |
-| COD checkout | REQ-CHK-01 | P0 | — | ✓ | TC-UI-05 | TC-API-05 |
-| Double confirm | REQ-CHK-02 | P0 | — | ✓ | TC-UI-05 | Manual |
-| Invoice verify | REQ-INV-01 | P0 | — | ✓ | TC-UI-05 | TC-API-05 |
+| Flow | Requirement ID | Priority | Smoke | Regression | Manual | UI test | API test |
+|------|----------------|----------|-------|------------|--------|---------|----------|
+| Registration | REQ-REG-01 | P1 | — | ✓ | TC-MAN-01 | TC-UI-04 | TC-API-04 |
+| Login (valid) | REQ-AUTH-01 | P0 | ✓ | — | TC-MAN-02 | TC-UI-02 | TC-API-02 |
+| Login (invalid) | REQ-AUTH-02 | P1 | — | ✓ | TC-MAN-03 | TC-UI-06 | TC-API-06 |
+| Profile | REQ-PROF-01 | P1 | — | ✓ | — | TC-UI-07 | — |
+| Catalog browse | REQ-CAT-01 | P2 | ✓ | — | — | TC-UI-01, 03 | TC-API-01 |
+| Product search | REQ-CAT-02 | P1 | — | ✓ | TC-MAN-04 | — | TC-API-07 |
+| Cart / quantity | REQ-CART-01 | P0 | — | ✓ | TC-MAN-05 | TC-UI-05 | TC-API-03, 05 |
+| COD checkout | REQ-CHK-01 | P0 | — | ✓ | TC-MAN-06 | TC-UI-05 | TC-API-05 |
+| Billing validation | REQ-BILL-01 | P1 | — | ✓ | TC-MAN-08 | — | — |
+| Double confirm | REQ-CHK-02 | P0 | — | ✓ | TC-MAN-07 | TC-UI-05 | — |
+| Invoice verify | REQ-INV-01 | P0 | — | ✓ | TC-MAN-06 | TC-UI-05 | TC-API-05 |
 
 ---
 
@@ -217,7 +231,7 @@ Low        —        —      Register  —
 1. **Smoke (3 UI + 3 API)** — SUT up, auth works, catalog reachable  
 2. **Regression E2E (TC-UI-05)** — Full purchase + double confirm + invoice  
 3. **Regression auth/profile/register** — TC-UI-04, 06, 07 + API counterparts  
-4. **Manual negative/edge** — TC-MAN-08 through TC-MAN-12  
+4. **Manual negative/edge** — TC-MAN-07, TC-MAN-08  
 
 ---
 

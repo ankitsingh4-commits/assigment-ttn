@@ -6,7 +6,7 @@ class CartApi {
   }
 
   async createCart(token) {
-    return this.client.post('/carts', {}, token);
+    return this.client.post('/carts', undefined, token);
   }
 
   async getCart(cartId, token) {
@@ -14,24 +14,19 @@ class CartApi {
   }
 
   async addProduct(cartId, productId, quantity = 1, token) {
-    const payload = { product_id: productId, quantity };
+    return this.client.post(
+      `/carts/${cartId}`,
+      { product_id: productId, quantity },
+      token,
+    );
+  }
 
-    const primary = await this.client.post(`/carts/${cartId}`, payload, token);
-    if ([200, 201].includes(primary.status())) {
-      return primary;
-    }
-
-    const alternate = await this.client.post('/carts', payload, token);
-    if ([200, 201].includes(alternate.status())) {
-      return alternate;
-    }
-
-    const items = await this.client.post(`/carts/${cartId}/items`, payload, token);
-    if ([200, 201].includes(items.status())) {
-      return items;
-    }
-
-    return this.client.post(`/carts/${cartId}/products`, payload, token);
+  async updateQuantity(cartId, productId, quantity, token) {
+    return this.client.put(
+      `/carts/${cartId}/product/quantity`,
+      { product_id: productId, quantity },
+      token,
+    );
   }
 }
 

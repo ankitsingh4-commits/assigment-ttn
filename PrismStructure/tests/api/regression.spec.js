@@ -1,76 +1,121 @@
 const { test, expect } = require('@playwright/test');
-const { AuthApi } = require('../../api/AuthApi');
+const { ToolshopFlow } = require('../../api/ToolshopFlow');
 const { ProductApi } = require('../../api/ProductApi');
-const { CartApi } = require('../../api/CartApi');
-const { InvoiceApi } = require('../../api/InvoiceApi');
-const { getDefaultUser, getTestData } = require('../../utils/env');
-const { uniqueEmail } = require('../../utils/dataGenerator');
+const { getTestData } = require('../../utils/env');
+const {
+  expectUserResponse,
+  expectTokenResponse,
+  expectCartItemAdded,
+  expectCartContainsProducts,
+  expectCodInvoiceCreated,
+  expectCodInvoiceDetails,
+  expectPaginatedProducts,
+} = require('../../utils/apiAssertions');
 
 test.describe('API Regression', () => {
   test('@regression TC-API-04 Register new user via API', async ({ request }) => {
-    const authApi = new AuthApi(request);
-    const email = uniqueEmail('apireg');
-    const { response, payload } = await authApi.register(email);
+    const flow = new ToolshopFlow(request);
+    const { response, payload } = await flow.registerUniqueUser();
+
     expect(response.status()).toBe(201);
     const body = await response.json();
-    expect(body.email).toBe(payload.email);
+    expectUserResponse(body, payload);
   });
 
   test('@regression TC-API-05 Full auth cart and invoice lifecycle', async ({ request }) => {
-    const authApi = new AuthApi(request);
-    const productApi = new ProductApi(request);
-    const cartApi = new CartApi(request);
-    const invoiceApi = new InvoiceApi(request);
+    const flow = new ToolshopFlow(request);
 
-    const email = uniqueEmail('flow');
-    const { response: regRes, payload } = await authApi.register(email);
-    expect(regRes.status()).toBe(201);
+    const { response: registerResponse, email, password, payload } =
+      await flow.registerUniqueUser();
+    expect(registerResponse.status()).toBe(201);
 
-    const { response: loginRes, body: loginBody } = await authApi.login(
-      email,
-      payload.password,
-    );
-    expect(loginRes.status()).toBe(200);
+    const { response: loginResponse, body: loginBody } = await flow.login(email, password);
+    expect(loginResponse.status()).toBe(200);
+    expectTokenResponse(loginBody);
     const token = loginBody.access_token;
 
-    const productsRes = await productApi.listProducts();
-    const productsBody = await productsRes.json();
-    const products = productsBody.data ?? productsBody;
-    const productId = products[0].id;
+    const productsResponse = await flow.listProducts();
+    expect(productsResponse.status()).toBe(200);
+    const productsBody = await productsResponse.json();
+    expectPaginatedProducts(productsBody);
 
-    const cartCreateRes = await cartApi.createCart(token);
-    expect(cartCreateRes.status()).toBe(201);
-    const cart = await cartCreateRes.json();
+    const selectedProducts = await flow.selectProducts(2);
+    expect(selectedProducts.length).toBe(2);
 
-    const addRes = await cartApi.addProduct(cart.id, productId, 1, token);
-    expect([200, 201]).toContain(addRes.status());
+    const cartCreateResponse = await flow.createCart(token);
+    expect(cartCreateResponse.status()).toBe(201);
+    const cart = await cartCreateResponse.json();
+    expect(cart.id).toEqual(expect.any(String));
 
-    const cartGetRes = await cartApi.getCart(cart.id, token);
-    expect(cartGetRes.status()).toBe(200);
-    const cartBody = await cartGetRes.json();
-    expect(cartBody.cart_items?.length ?? cartBody.items?.length ?? 1).toBeGreaterThan(0);
+    const cartSelections = [
+      { productId: selectedProducts[0].id, quantity: 2 },
+      { productId: selectedProducts[1].id, quantity: 1 },
+    ];
 
-    const invoiceRes = await invoiceApi.createInvoice(cart.id, token);
-    expect(invoiceRes.status()).toBe(201);
-    const invoice = await invoiceRes.json();
-    expect(invoice.id ?? invoice.invoice_number).toBeTruthy();
+    for (const selection of cartSelections) {
+      const addResponse = await flow.addProductToCart(
+        cart.id,
+        selection.productId,
+        selection.quantity,
+        token,
+      );
+      expect(addResponse.status()).toBe(200);
+      const addBody = await addResponse.json();
+      expectCartItemAdded(addBody);
+    }
+
+    const cartGetResponse = await flow.getCart(cart.id, token);
+    expect(cartGetResponse.status()).toBe(200);
+    const cartBody = await cartGetResponse.json();
+    expectCartContainsProducts(cartBody, cart.id, cartSelections);
+
+    const { response: invoiceResponse, payload: invoiceRequest } =
+      await flow.createCodInvoice(cart.id, token);
+    expect([200, 201]).toContain(invoiceResponse.status());
+
+    const createdInvoice = await invoiceResponse.json();
+    expectCodInvoiceCreated(createdInvoice, invoiceRequest);
+
+    const invoiceGetResponse = await flow.getInvoice(createdInvoice.id, token);
+    expect(invoiceGetResponse.status()).toBe(200);
+    const invoiceDetails = await invoiceGetResponse.json();
+    expectCodInvoiceDetails(invoiceDetails, invoiceRequest, cartSelections.length);
+    expect(invoiceRequest.payment_method).toBe('cash-on-delivery');
+    expect(invoiceRequest.payment_details).toEqual({});
+    expect(payload.email).toBe(email);
+    expect(payload.password).toBe(password);
   });
 
   test('@regression TC-API-06 Login with wrong password is rejected', async ({ request }) => {
-    const user = getDefaultUser();
+    const flow = new ToolshopFlow(request);
     const { invalidCredentials } = getTestData();
-    const authApi = new AuthApi(request);
-    const { response } = await authApi.login(user.email, invalidCredentials.wrongPassword);
-    expect(response.status()).toBe(401);
+
+    const { email, password } = await flow.registerUniqueUser();
+    const { response: validLogin } = await flow.login(email, password);
+    expect(validLogin.status()).toBe(200);
+
+    const { response: invalidLogin } = await flow.login(
+      email,
+      invalidCredentials.wrongPassword,
+    );
+    expect(invalidLogin.status()).toBe(401);
+
+    const errorBody = await invalidLogin.json();
+    expect(errorBody.access_token).toBeUndefined();
   });
 
   test('@regression TC-API-07 Product search returns matching results', async ({ request }) => {
     const { search } = getTestData();
     const productApi = new ProductApi(request);
     const response = await productApi.search(search.existingProduct);
+
     expect(response.status()).toBe(200);
     const body = await response.json();
-    const items = body.data ?? body;
-    expect(items.length).toBeGreaterThan(0);
+    expectPaginatedProducts(body);
+
+    const match = body.data.find((product) =>
+      product.name.toLowerCase().includes(search.existingProduct.toLowerCase()),
+    );
+    expect(match).toBeTruthy();
   });
 });

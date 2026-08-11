@@ -22,6 +22,13 @@ class ApiClient {
       headers: token ? { Authorization: `Bearer ${token}` } : undefined,
     });
   }
+
+  async put(path, data, token) {
+    return this.request.put(this.url(path), {
+      data,
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    });
+  }
 }
 
 module.exports = { ApiClient };

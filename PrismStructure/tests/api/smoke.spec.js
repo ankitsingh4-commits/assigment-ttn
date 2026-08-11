@@ -1,34 +1,47 @@
 const { test, expect } = require('@playwright/test');
-const { ProductApi } = require('../../api/ProductApi');
-const { AuthApi } = require('../../api/AuthApi');
-const { CartApi } = require('../../api/CartApi');
-const { getDefaultUser } = require('../../utils/env');
+const { ToolshopFlow } = require('../../api/ToolshopFlow');
+const {
+  expectPaginatedProducts,
+  expectTokenResponse,
+  expectCartCreated,
+} = require('../../utils/apiAssertions');
 
 test.describe('API Smoke', () => {
-  test('@smoke TC-API-01 List products returns success', async ({ request }) => {
-    const productApi = new ProductApi(request);
-    const response = await productApi.listProducts();
+  test('@smoke TC-API-01 List products returns paginated catalog', async ({ request }) => {
+    const flow = new ToolshopFlow(request);
+    const response = await flow.listProducts();
+
     expect(response.status()).toBe(200);
     const body = await response.json();
-    expect(body.data?.length ?? body.length).toBeGreaterThan(0);
+    expectPaginatedProducts(body);
   });
 
-  test('@smoke TC-API-02 Login returns access token', async ({ request }) => {
-    const user = getDefaultUser();
-    const authApi = new AuthApi(request);
-    const { response, body } = await authApi.login(user.email, user.password);
-    expect(response.status()).toBe(200);
-    expect(body.access_token).toBeTruthy();
+  test('@smoke TC-API-02 Register and login returns bearer token', async ({ request }) => {
+    const flow = new ToolshopFlow(request);
+
+    const { response: registerResponse, email, password, payload } =
+      await flow.registerUniqueUser();
+    expect(registerResponse.status()).toBe(201);
+
+    const { response: loginResponse, body: loginBody } = await flow.login(email, password);
+    expect(loginResponse.status()).toBe(200);
+    expectTokenResponse(loginBody);
+
+    expect(payload.email).toBe(email);
+    expect(payload.password).toBe(password);
   });
 
-  test('@smoke TC-API-03 Create cart returns cart id', async ({ request }) => {
-    const user = getDefaultUser();
-    const authApi = new AuthApi(request);
-    const { body: loginBody } = await authApi.login(user.email, user.password);
-    const cartApi = new CartApi(request);
-    const response = await cartApi.createCart(loginBody.access_token);
-    expect(response.status()).toBe(201);
-    const body = await response.json();
-    expect(body.id).toBeTruthy();
+  test('@smoke TC-API-03 Authenticated user can create a cart', async ({ request }) => {
+    const flow = new ToolshopFlow(request);
+
+    const { email, password } = await flow.registerUniqueUser();
+    const { body: loginBody } = await flow.login(email, password);
+    const token = loginBody.access_token;
+
+    const cartResponse = await flow.createCart(token);
+    expect(cartResponse.status()).toBe(201);
+
+    const cartBody = await cartResponse.json();
+    expectCartCreated(cartBody);
   });
 });

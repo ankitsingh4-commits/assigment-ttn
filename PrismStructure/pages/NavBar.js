@@ -1,25 +1,21 @@
-import { Page, Locator } from '@playwright/test';
-
-export class NavBar {
-  readonly page: Page;
-
-  constructor(page: Page) {
+class NavBar {
+  constructor(page) {
     this.page = page;
   }
 
-  get cartLink(): Locator {
+  get cartLink() {
     return this.page.locator('[data-test="nav-cart"]');
   }
 
-  get profileMenu(): Locator {
+  get profileMenu() {
     return this.page.locator('[data-test="nav-profile"]');
   }
 
-  get myInvoicesLink(): Locator {
+  get myInvoicesLink() {
     return this.page.getByRole('link', { name: 'My invoices' });
   }
 
-  get myProfileLink(): Locator {
+  get myProfileLink() {
     return this.page.getByRole('link', { name: 'My profile' });
   }
 
@@ -37,3 +33,5 @@ export class NavBar {
     await this.myProfileLink.click();
   }
 }
+
+module.exports = { NavBar };

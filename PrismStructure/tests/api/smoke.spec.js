@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test';
-import { ProductApi } from '../../api/ProductApi';
-import { AuthApi } from '../../api/AuthApi';
-import { CartApi } from '../../api/CartApi';
-import { DEFAULT_USER } from '../../utils/env';
+const { test, expect } = require('@playwright/test');
+const { ProductApi } = require('../../api/ProductApi');
+const { AuthApi } = require('../../api/AuthApi');
+const { CartApi } = require('../../api/CartApi');
+const { getDefaultUser } = require('../../utils/env');
 
 test.describe('API Smoke', () => {
   test('@smoke TC-API-01 List products returns success', async ({ request }) => {
@@ -14,15 +14,17 @@ test.describe('API Smoke', () => {
   });
 
   test('@smoke TC-API-02 Login returns access token', async ({ request }) => {
+    const user = getDefaultUser();
     const authApi = new AuthApi(request);
-    const { response, body } = await authApi.login(DEFAULT_USER.email, DEFAULT_USER.password);
+    const { response, body } = await authApi.login(user.email, user.password);
     expect(response.status()).toBe(200);
     expect(body.access_token).toBeTruthy();
   });
 
   test('@smoke TC-API-03 Create cart returns cart id', async ({ request }) => {
+    const user = getDefaultUser();
     const authApi = new AuthApi(request);
-    const { body: loginBody } = await authApi.login(DEFAULT_USER.email, DEFAULT_USER.password);
+    const { body: loginBody } = await authApi.login(user.email, user.password);
     const cartApi = new CartApi(request);
     const response = await cartApi.createCart(loginBody.access_token);
     expect(response.status()).toBe(201);

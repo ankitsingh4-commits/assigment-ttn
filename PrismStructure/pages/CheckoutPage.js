@@ -1,59 +1,45 @@
-import { Page, Locator } from '@playwright/test';
-
-export class CheckoutPage {
-  readonly page: Page;
-
-  constructor(page: Page) {
+class CheckoutPage {
+  constructor(page) {
     this.page = page;
   }
 
-  get street(): Locator {
+  get street() {
     return this.page.locator('[data-test="street"]');
   }
 
-  get city(): Locator {
+  get city() {
     return this.page.locator('[data-test="city"]');
   }
 
-  get state(): Locator {
+  get state() {
     return this.page.locator('[data-test="state"]');
   }
 
-  get country(): Locator {
+  get country() {
     return this.page.locator('[data-test="country"]');
   }
 
-  get postalCode(): Locator {
+  get postalCode() {
     return this.page.locator('[data-test="postal_code"]');
   }
 
-  get proceedButton(): Locator {
+  get proceedButton() {
     return this.page.locator('[data-test="proceed-2"]');
   }
 
-  get paymentMethod(): Locator {
+  get paymentMethod() {
     return this.page.locator('[data-test="payment-method"]');
   }
 
-  get finishButton(): Locator {
+  get finishButton() {
     return this.page.locator('[data-test="finish"]');
   }
 
-  get paymentSuccess(): Locator {
-    return this.page.locator('[data-test="payment-success-message"]');
-  }
-
-  get orderComplete(): Locator {
+  get orderComplete() {
     return this.page.getByText('Thanks for your order');
   }
 
-  async fillBillingAddress(data: {
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    postalCode: string;
-  }) {
+  async fillBillingAddress(data) {
     await this.street.fill(data.street);
     await this.city.fill(data.city);
     await this.state.fill(data.state);
@@ -76,3 +62,5 @@ export class CheckoutPage {
     await this.finishButton.click();
   }
 }
+
+module.exports = { CheckoutPage };

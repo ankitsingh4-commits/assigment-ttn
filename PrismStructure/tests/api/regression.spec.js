@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { AuthApi } from '../../api/AuthApi';
-import { ProductApi } from '../../api/ProductApi';
-import { CartApi } from '../../api/CartApi';
-import { InvoiceApi } from '../../api/InvoiceApi';
-import { DEFAULT_USER } from '../../utils/env';
-import { uniqueEmail } from '../../utils/dataGenerator';
+const { test, expect } = require('@playwright/test');
+const { AuthApi } = require('../../api/AuthApi');
+const { ProductApi } = require('../../api/ProductApi');
+const { CartApi } = require('../../api/CartApi');
+const { InvoiceApi } = require('../../api/InvoiceApi');
+const { getDefaultUser, getTestData } = require('../../utils/env');
+const { uniqueEmail } = require('../../utils/dataGenerator');
 
 test.describe('API Regression', () => {
   test('@regression TC-API-04 Register new user via API', async ({ request }) => {
@@ -17,6 +17,7 @@ test.describe('API Regression', () => {
   });
 
   test('@regression TC-API-05 Full auth cart and invoice lifecycle', async ({ request }) => {
+    const { apiRegister } = getTestData();
     const authApi = new AuthApi(request);
     const productApi = new ProductApi(request);
     const cartApi = new CartApi(request);
@@ -26,9 +27,12 @@ test.describe('API Regression', () => {
     const { response: regRes } = await authApi.register(email);
     expect(regRes.status()).toBe(201);
 
-    const { response: loginRes, body: loginBody } = await authApi.login(email, 'Welcome01!');
+    const { response: loginRes, body: loginBody } = await authApi.login(
+      email,
+      apiRegister.password,
+    );
     expect(loginRes.status()).toBe(200);
-    const token = loginBody.access_token as string;
+    const token = loginBody.access_token;
 
     const productsRes = await productApi.listProducts();
     const productsBody = await productsRes.json();
@@ -54,18 +58,20 @@ test.describe('API Regression', () => {
   });
 
   test('@regression TC-API-06 Login with wrong password is rejected', async ({ request }) => {
+    const user = getDefaultUser();
+    const { invalidCredentials } = getTestData();
     const authApi = new AuthApi(request);
-    const { response } = await authApi.login(DEFAULT_USER.email, 'NotARealPassword!');
+    const { response } = await authApi.login(user.email, invalidCredentials.wrongPassword);
     expect(response.status()).toBe(401);
   });
 
   test('@regression TC-API-07 Product search returns matching results', async ({ request }) => {
+    const { search } = getTestData();
     const productApi = new ProductApi(request);
-    const response = await productApi.search('hammer');
+    const response = await productApi.search(search.existingProduct);
     expect(response.status()).toBe(200);
     const body = await response.json();
     const items = body.data ?? body;
     expect(items.length).toBeGreaterThan(0);
   });
-
 });

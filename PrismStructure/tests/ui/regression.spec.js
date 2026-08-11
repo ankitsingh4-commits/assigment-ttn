@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/uiFixtures';
-import { DEFAULT_USER } from '../../utils/env';
-import { uniqueEmail } from '../../utils/dataGenerator';
+const { test, expect } = require('../../fixtures/uiFixtures');
+const { getDefaultUser, getTestData } = require('../../utils/env');
+const { uniqueEmail } = require('../../utils/dataGenerator');
 
 test.describe('UI Regression', () => {
   test('@regression TC-UI-04 User registration with valid details', async ({
@@ -9,12 +9,18 @@ test.describe('UI Regression', () => {
     registerPage,
     navBar,
   }) => {
+    const { registerUser } = getTestData();
     const email = uniqueEmail('uireg');
     await homePage.goto('/');
     await homePage.openRegister();
-    await registerPage.register('Auto', 'Tester', email, 'Welcome01!');
+    await registerPage.register(
+      registerUser.firstName,
+      registerUser.lastName,
+      email,
+      registerUser.password,
+    );
     await expect(navBar.profileMenu).toBeVisible({ timeout: 15000 });
-    await expect(page.getByText('Auto Tester')).toBeVisible();
+    await expect(page.getByText(`${registerUser.firstName} ${registerUser.lastName}`)).toBeVisible();
   });
 
   test('@regression TC-UI-05 End-to-end COD purchase and invoice', async ({
@@ -26,9 +32,12 @@ test.describe('UI Regression', () => {
     checkoutPage,
     navBar,
   }) => {
+    const user = getDefaultUser();
+    const { billingAddress } = getTestData();
+
     await homePage.goto('/');
     await homePage.openSignIn();
-    await loginPage.login(DEFAULT_USER.email, DEFAULT_USER.password);
+    await loginPage.login(user.email, user.password);
     await expect(navBar.profileMenu).toBeVisible();
 
     await homePage.productCards.first().click();
@@ -39,14 +48,7 @@ test.describe('UI Regression', () => {
     await expect(cartPage.lineItems.first()).toBeVisible();
     await cartPage.proceedToCheckout();
 
-    await checkoutPage.fillBillingAddress({
-      street: 'Zoey Shore',
-      city: 'Hesselbury',
-      state: 'Florida',
-      country: 'United States',
-      postalCode: '1234AA',
-    });
-
+    await checkoutPage.fillBillingAddress(billingAddress);
     await checkoutPage.selectCashOnDelivery();
     await checkoutPage.confirmPaymentTwice();
 
@@ -60,24 +62,26 @@ test.describe('UI Regression', () => {
     homePage,
     loginPage,
   }) => {
+    const user = getDefaultUser();
+    const { invalidCredentials } = getTestData();
     await homePage.goto('/');
     await homePage.openSignIn();
-    await loginPage.login(DEFAULT_USER.email, 'wrong-password-123');
+    await loginPage.login(user.email, invalidCredentials.wrongPassword);
     await expect(loginPage.errorAlert).toBeVisible();
   });
 
   test('@regression TC-UI-07 Profile shows registered user details', async ({
-    page,
     homePage,
     loginPage,
     navBar,
     profilePage,
   }) => {
+    const user = getDefaultUser();
     await homePage.goto('/');
     await homePage.openSignIn();
-    await loginPage.login(DEFAULT_USER.email, DEFAULT_USER.password);
+    await loginPage.login(user.email, user.password);
     await navBar.openMyProfile();
-    await expect(profilePage.email).toHaveValue(DEFAULT_USER.email);
+    await expect(profilePage.email).toHaveValue(user.email);
     await expect(profilePage.firstName).not.toBeEmpty();
   });
 });

@@ -30,7 +30,7 @@ assigment-ttn/
 
 ## Framework
 
-**Playwright** with TypeScript, Page Object Model, and API client layer (`PrismStructure/`). Tags: `@smoke`, `@regression`.
+**Playwright** with JavaScript, Page Object Model, and API client layer (`PrismStructure/`). Tags: `@smoke`, `@regression`.
 
 ## Setup
 
@@ -46,13 +46,13 @@ npx playwright install chromium
 |----------|---------|
 | `BASE_URL` | `https://practicesoftwaretesting.com` |
 | `API_BASE_URL` | `https://api.practicesoftwaretesting.com` |
-| `USER_EMAIL` | `customer2@practicesoftwaretesting.com` |
-| `USER_PASSWORD` | `welcome01` |
+| `USER_EMAIL` | From `data/testData.json` (override via env) |
+| `USER_PASSWORD` | From `data/testData.json` (override via env) |
 
 ## Test Data
 
-- `PrismStructure/data/testData.json` — default user and billing address
-- `PrismStructure/utils/dataGenerator.ts` — unique registration emails and invoice payloads
+- `PrismStructure/data/testData.json` — users, billing, API payloads, invalid credentials
+- `PrismStructure/utils/dataGenerator.js` — unique emails and payload builders from test data
 
 ## Run Commands
 

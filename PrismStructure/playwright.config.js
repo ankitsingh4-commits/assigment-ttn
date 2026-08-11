@@ -1,9 +1,10 @@
-import { defineConfig, devices } from '@playwright/test';
+const { defineConfig, devices } = require('@playwright/test');
 
 const baseURL = process.env.BASE_URL || 'https://practicesoftwaretesting.com';
 
-export default defineConfig({
+module.exports = defineConfig({
   testDir: './tests',
+  testMatch: '**/*.spec.js',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

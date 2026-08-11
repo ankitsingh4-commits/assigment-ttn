@@ -3,11 +3,46 @@
     "email": "customer2@practicesoftwaretesting.com",
     "password": "welcome01"
   },
+  "registerUser": {
+    "firstName": "Auto",
+    "lastName": "Tester",
+    "password": "Welcome01!"
+  },
+  "invalidCredentials": {
+    "wrongPassword": "WrongPass123!"
+  },
+  "search": {
+    "existingProduct": "hammer",
+    "uiProductTerm": "Thor Hammer"
+  },
   "billingAddress": {
     "street": "Zoey Shore",
     "city": "Hesselbury",
     "state": "Florida",
     "country": "United States",
     "postalCode": "1234AA"
+  },
+  "apiRegister": {
+    "first_name": "QA",
+    "last_name": "Automation",
+    "password": "Welcome01!",
+    "dob": "1990-05-15",
+    "phone": "5551234567",
+    "address": {
+      "street": "Zoey Shore",
+      "city": "Hesselbury",
+      "state": "Florida",
+      "country": "United States",
+      "postal_code": "1234AA"
+    }
+  },
+  "apiInvoice": {
+    "billing_street": "Zoey Shore",
+    "billing_city": "Hesselbury",
+    "billing_state": "Florida",
+    "billing_country": "TG",
+    "billing_postal_code": "1234AA",
+    "payment_method": "cash-on-delivery",
+    "payment_details": {}
   }
 }

@@ -1,33 +1,29 @@
-import { Page, Locator } from '@playwright/test';
-
-export class RegisterPage {
-  readonly page: Page;
-
-  constructor(page: Page) {
+class RegisterPage {
+  constructor(page) {
     this.page = page;
   }
 
-  get firstName(): Locator {
+  get firstName() {
     return this.page.locator('[data-test="first-name"]');
   }
 
-  get lastName(): Locator {
+  get lastName() {
     return this.page.locator('[data-test="last-name"]');
   }
 
-  get email(): Locator {
+  get email() {
     return this.page.locator('[data-test="email"]');
   }
 
-  get password(): Locator {
+  get password() {
     return this.page.locator('[data-test="password"]');
   }
 
-  get registerButton(): Locator {
+  get registerButton() {
     return this.page.locator('[data-test="register-submit"]');
   }
 
-  async register(firstName: string, lastName: string, email: string, password: string) {
+  async register(firstName, lastName, email, password) {
     await this.firstName.fill(firstName);
     await this.lastName.fill(lastName);
     await this.email.fill(email);
@@ -35,3 +31,5 @@ export class RegisterPage {
     await this.registerButton.click();
   }
 }
+
+module.exports = { RegisterPage };

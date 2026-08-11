@@ -221,15 +221,15 @@ npm run report
 |--------|-------------------|
 | `npm run report` | `playwright show-report reports/html` |
 
-**Generated paths (not committed):**
+**Generated paths:**
 
-| Artifact | Path |
-|----------|------|
-| HTML report | `PrismStructure/reports/html/index.html` |
-| JSON execution report | `PrismStructure/reports/execution-report.json` |
-| Traces, screenshots, video | `PrismStructure/reports/test-results/` |
+| Artifact | Path | Committed |
+|----------|------|-----------|
+| HTML report | `PrismStructure/reports/html/index.html` | No |
+| JSON execution report | `PrismStructure/reports/execution-report.json` | **Yes** (committed as execution evidence) |
+| Traces, screenshots, video | `PrismStructure/reports/test-results/` | No |
 
-`PrismStructure/.gitignore` excludes `reports/html/`, `reports/test-results/`, `playwright-report/`, `*.log`, `.env`, and `node_modules/`.
+`PrismStructure/.gitignore` excludes `reports/html/`, `reports/test-results/`, `playwright-report/`, `*.log`, `.env`, and `node_modules/`. The JSON execution report is intentionally tracked for assessment evidence.
 
 ---
 
@@ -241,12 +241,13 @@ assigment-ttn/
 ├── project-info.md              # Detailed assessment documentation
 ├── requirement-risk-analysis.md # Requirement-to-risk mapping
 ├── README.md                    # This file
-├── ai-prompts/                  # AI prompt history (5 markdown files)
+├── ai-prompts/                  # AI prompt history (6 markdown files)
 │   ├── requirements-and-planning.md
 │   ├── test-design.md
 │   ├── test-data.md
 │   ├── automation-and-debugging.md
-│   └── documentation-and-summary.md
+│   ├── documentation-and-summary.md
+│   └── conversation-log.md
 ├── PrismStructure/              # Playwright automation framework
 │   ├── pages/                   # Page Object Model (10 modules incl. BasePage)
 │   │   ├── BasePage.js

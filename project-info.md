@@ -11,7 +11,7 @@
 
 This repository delivers QA coverage for the **Practice Software Testing Toolshop v2.4** ecommerce application as part of the QA AI Capability Exercise. Work spans **8 manual** cases (`FunctionalTestCase.csv`), **8 UI** automated tests (`PrismStructure/tests/ui/`), and **8 API** automated tests (`PrismStructure/tests/api/`), organized with `@smoke` and `@regression` tags.
 
-Automation lives under `PrismStructure/` in a Prism-inspired layered layout: Page Object Model for UI, API client wrappers for REST calls, shared fixtures, static and generated test data, and Playwright reporters for HTML and JSON output. Root-level artifacts include `readme.md`, `ai-prompts/`, `requirement-risk-analysis.md`, and this file. There is **no `docs/` folder** in the repository; operational documentation is in `readme.md` and `PrismStructure/README.md`.
+Automation lives under `PrismStructure/` in a Prism-inspired layered layout: Page Object Model for UI, API client wrappers for REST calls, shared fixtures, static and generated test data, and Playwright reporters for HTML and JSON output. Root-level artifacts include `README.md`, `ai-prompts/`, `requirement-risk-analysis.md`, and this file. There is **no `docs/` folder** in the repository; operational documentation is in `README.md` and `PrismStructure/README.md`.
 
 | Layer | Count | IDs | Location |
 |-------|-------|-----|----------|
@@ -214,13 +214,13 @@ Manual regression: **TC-MAN-01, 03–08** (registration, invalid login, search, 
 - UI billing (`billingAddress`) and API invoice (`apiInvoice`) share Zoey Shore / Hesselbury / Florida values for traceability; API uses `billing_country: "TG"` per assessment example payload.
 - `CheckoutPage.fillBillingAddress()` handles country as select when visible.
 
-There is no `.env.example` file in the repo despite `PrismStructure/README.md` referencing one; env vars are optional and documented in `readme.md`.
+`PrismStructure/.env.example` documents optional env overrides (`BASE_URL`, `API_BASE_URL`, `USER_EMAIL`, `USER_PASSWORD`); env vars are optional and defaults are documented in `README.md`.
 
 ---
 
 ## 10. How AI was used
 
-Prompt history is captured in `ai-prompts/` (five markdown files):
+Prompt history is captured in `ai-prompts/` (six markdown files):
 
 | File | AI use |
 |------|--------|
@@ -228,7 +228,8 @@ Prompt history is captured in `ai-prompts/` (five markdown files):
 | `test-design.md` | Designed manual CSV, UI/API scenario lists and TC ID scheme |
 | `test-data.md` | Built register and invoice payloads aligned to Toolshop rules |
 | `automation-and-debugging.md` | Cart API patterns, double-confirm checkout, flaky login assertion fixes |
-| `documentation-and-summary.md` | `readme.md`, `project-info.md`, root README |
+| `documentation-and-summary.md` | `README.md`, `project-info.md`, root documentation |
+| `conversation-log.md` | Session transcript of iterative debugging and validation runs |
 
 **Workflow phases:**
 
@@ -270,7 +271,6 @@ For a new ecommerce or API-backed app, the same Prism-style separation (UI POM +
 assigment-ttn/
 ├── FunctionalTestCase.csv
 ├── project-info.md
-├── readme.md
 ├── README.md
 ├── requirement-risk-analysis.md
 ├── ai-prompts/

@@ -27,7 +27,7 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | Invalid or duplicate accounts pollute user base; weak validation allows unusable credentials. |
 | **Failure impact** | Users cannot self-serve onboarding; support burden increases; downstream login/cart flows blocked for new users. |
 | **Testing priority** | **P1 — High** |
-| **Recommended coverage** | **UI:** valid registration (TC-UI-04). **API:** POST `/users/register` with full payload including dob, phone, address (TC-API-04). |
+| **Recommended coverage** | **UI:** valid registration (TC-UI-02, Smoke). **API:** POST `/users/register` and login returns bearer token (TC-API-02, Smoke). |
 | **Classification** | **Regression** (not every build; uses unique email data) |
 
 ### Additional scenarios
@@ -48,7 +48,7 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | Auth bypass or silent failures lock legitimate customers out or expose protected routes. |
 | **Failure impact** | **Total loss of purchasable sessions** — no cart persistence, no checkout, no invoice access. |
 | **Testing priority** | **P0 — Critical** |
-| **Recommended coverage** | **UI:** valid login (TC-UI-02, Smoke); invalid password (TC-UI-06, Regression). **API:** POST `/users/login` returns `access_token` (TC-API-02 Smoke); wrong password returns 401 (TC-API-06 Regression). |
+| **Recommended coverage** | **UI:** valid login (TC-UI-03, Smoke); invalid password (TC-UI-05, Regression). **API:** POST `/users/login` returns `access_token` (TC-API-02, Smoke); wrong password returns 401 (TC-API-05, Regression). |
 | **Classification** | Valid login = **Smoke**; invalid login = **Regression** |
 
 ### Additional scenarios
@@ -69,7 +69,7 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | Wrong profile data erodes trust; may indicate session mix-up. |
 | **Failure impact** | User cannot confirm account details; may proceed with wrong billing identity. |
 | **Testing priority** | **P1 — High** |
-| **Recommended coverage** | **UI:** open profile, assert email and name fields (TC-UI-07, Regression). **API:** GET `/users/me` with bearer token (optional extension). |
+| **Recommended coverage** | **UI:** open profile, assert name fields (TC-UI-06, Regression). **API:** GET `/users/me` with bearer token (optional extension). |
 | **Classification** | **Regression** |
 
 ---
@@ -82,14 +82,14 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | Catalog or search failures prevent product discovery — zero conversion. |
 | **Failure impact** | Users cannot find items to purchase; marketing and SEO paths break. |
 | **Testing priority** | **P2 — Medium** (browse) / **P1 — High** (search if primary entry) |
-| **Recommended coverage** | **UI:** homepage catalog (TC-UI-01 Smoke); product detail from home (TC-UI-03 Smoke). **API:** GET `/products`, GET `/products/search?q=` (TC-API-01, TC-API-07). Search UI = Manual (TC-MAN-08/09). |
-| **Classification** | Catalog load = **Smoke**; search edge cases = **Regression** (manual) |
+| **Recommended coverage** | **UI:** homepage catalog (TC-UI-01, Smoke); product search and detail in E2E (TC-UI-04, Smoke); no-match search empty state (TC-UI-07, Regression). **API:** GET `/products` (TC-API-01, Smoke). Positive search UI = Manual (TC-MAN-04). |
+| **Classification** | Catalog load = **Smoke**; search edge cases = **Regression** |
 
 ### Additional scenarios
 
 | Scenario | Risk if untested | Coverage |
 |----------|------------------|----------|
-| No search results (negative) | Confusing empty state | Manual |
+| No search results (negative) | Confusing empty state | TC-UI-07 |
 | Special characters in search (edge) | XSS or broken query handling | Manual |
 | Out-of-stock product display | User adds unavailable item | Manual |
 
@@ -103,15 +103,15 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | **Cart state inconsistency** — wrong quantity, price, or missing items — causes checkout disputes and revenue errors. |
 | **Failure impact** | Incorrect charges; checkout blocked; abandoned carts; invoice mismatch. |
 | **Testing priority** | **P0 — Critical** (quantity/totals); **P1** (multi-item) |
-| **Recommended coverage** | **UI:** add with quantity > 1, verify cart line and proceed (TC-UI-05, Regression). **API:** POST `/carts`, add product, GET `/carts/{id}` (TC-API-03, TC-API-05). |
-| **Classification** | **Regression** (full cart logic); smoke only validates catalog → PDP path |
+| **Recommended coverage** | **UI:** multi-item cart, quantity update, and totals in E2E (TC-UI-04, Smoke). **API:** POST `/carts`, add product, GET `/carts/{id}` (TC-API-03, Smoke); full lifecycle (TC-API-04, Regression). |
+| **Classification** | **Regression** (full cart logic); smoke validates catalog → cart → checkout path |
 
 ### Additional scenarios
 
 | Scenario | Risk if untested | Coverage |
 |----------|------------------|----------|
-| Quantity = 0 or empty (edge) | Invalid cart state | Manual (TC-MAN-11) |
-| Multiple distinct products | Total calculation errors | Manual / future automation |
+| Quantity = 0 or empty (edge) | Invalid cart state | Manual (TC-MAN-05) |
+| Multiple distinct products | Total calculation errors | TC-UI-04, TC-MAN-05 |
 | Cart after session refresh | Lost cart / duplicate items | Manual |
 | Anonymous vs authenticated cart | Wrong cart binding | API |
 
@@ -125,8 +125,8 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | Checkout failure = **direct revenue loss**; invalid address data causes fulfillment failures. |
 | **Failure impact** | Order not placed; customer sees error at payment step; no invoice created. |
 | **Testing priority** | **P0 — Critical** |
-| **Recommended coverage** | **UI:** billing form (`data-test` street, city, state, country, postal_code), payment method select, proceed steps (TC-UI-05). **API:** invoice POST with `payment_method: cash-on-delivery` and billing fields (TC-API-05). |
-| **Classification** | **Regression** (full path too heavy for smoke) |
+| **Recommended coverage** | **UI:** billing form, payment method select, proceed steps in E2E (TC-UI-04, Smoke). **API:** invoice POST with `payment_method: cash-on-delivery` and billing fields (TC-API-04, Regression). |
+| **Classification** | **Regression** (full path too heavy for smoke alone) |
 
 ### Additional scenarios
 
@@ -159,7 +159,7 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | **Assessment-critical edge case** — single confirm may leave order incomplete without invoice. |
 | **Failure impact** | User believes order succeeded but **no invoice** appears under My Invoices; support and reconciliation gaps. |
 | **Testing priority** | **P0 — Critical** |
-| **Recommended coverage** | **UI:** `confirmPaymentTwice()` in automation (TC-UI-05). **Manual:** single-confirm edge (TC-MAN-07). |
+| **Recommended coverage** | **UI:** `confirmPaymentTwice()` in E2E (TC-UI-04, Smoke); single-confirm edge (TC-UI-08, Regression). **Manual:** single-confirm edge (TC-MAN-07). |
 | **Classification** | **Regression** (edge behavior; must be in E2E) |
 
 ---
@@ -172,16 +172,16 @@ Toolshop’s core business value is enabling a registered user to discover produ
 | **Business risk** | Missing or incorrect invoices break order audit trail and customer proof of purchase. |
 | **Failure impact** | No record of sale; customer cannot verify order; downstream reporting fails. |
 | **Testing priority** | **P0 — Critical** |
-| **Recommended coverage** | **UI:** assert "Thanks for your order" + `[data-test="invoice-number"]` on My Invoices (TC-UI-05). **API:** POST `/invoices` with `cart_id` and billing payload; GET `/invoices/{id}` (TC-API-05). |
+| **Recommended coverage** | **UI:** assert invoice number on My Invoices after E2E checkout (TC-UI-04, Smoke). **API:** POST `/invoices` with `cart_id` and billing payload; GET `/invoices/{id}` (TC-API-04, Regression). |
 | **Classification** | **Regression** |
 
 ### Additional scenarios
 
 | Scenario | Risk if untested | Coverage |
 |----------|------------------|----------|
-| Invoice list empty after checkout | Silent order failure | Covered by TC-UI-05 |
+| Invoice list empty after checkout | Silent order failure | Covered by TC-UI-04 |
 | Invoice PDF download | Document delivery | Manual |
-| API invoice without auth token | Security hole | API negative (manual) |
+| API invoice without auth token | Security hole | TC-API-06 |
 
 ---
 
@@ -189,17 +189,17 @@ Toolshop’s core business value is enabling a registered user to discover produ
 
 | Flow | Requirement ID | Priority | Smoke | Regression | Manual | UI test | API test |
 |------|----------------|----------|-------|------------|--------|---------|----------|
-| Registration | REQ-REG-01 | P1 | — | ✓ | TC-MAN-01 | TC-UI-04 | TC-API-04 |
-| Login (valid) | REQ-AUTH-01 | P0 | ✓ | — | TC-MAN-02 | TC-UI-02 | TC-API-02 |
-| Login (invalid) | REQ-AUTH-02 | P1 | — | ✓ | TC-MAN-03 | TC-UI-06 | TC-API-06 |
-| Profile | REQ-PROF-01 | P1 | — | ✓ | — | TC-UI-07 | — |
-| Catalog browse | REQ-CAT-01 | P2 | ✓ | — | — | TC-UI-01, 03 | TC-API-01 |
-| Product search | REQ-CAT-02 | P1 | — | ✓ | TC-MAN-04 | — | TC-API-07 |
-| Cart / quantity | REQ-CART-01 | P0 | — | ✓ | TC-MAN-05 | TC-UI-05 | TC-API-03, 05 |
-| COD checkout | REQ-CHK-01 | P0 | — | ✓ | TC-MAN-06 | TC-UI-05 | TC-API-05 |
+| Registration | REQ-REG-01 | P1 | ✓ | — | TC-MAN-01 | TC-UI-02 | TC-API-02 |
+| Login (valid) | REQ-AUTH-01 | P0 | ✓ | — | TC-MAN-02 | TC-UI-03 | TC-API-02 |
+| Login (invalid) | REQ-AUTH-02 | P1 | — | ✓ | TC-MAN-03 | TC-UI-05 | TC-API-05 |
+| Profile | REQ-PROF-01 | P1 | — | ✓ | — | TC-UI-06 | — |
+| Catalog browse | REQ-CAT-01 | P2 | ✓ | — | — | TC-UI-01 | TC-API-01 |
+| Product search | REQ-CAT-02 | P1 | — | ✓ | TC-MAN-04 | TC-UI-04, 07 | — |
+| Cart / quantity | REQ-CART-01 | P0 | ✓ | — | TC-MAN-05 | TC-UI-04 | TC-API-03, 04 |
+| COD checkout | REQ-CHK-01 | P0 | ✓ | — | TC-MAN-06 | TC-UI-04 | TC-API-04 |
 | Billing validation | REQ-BILL-01 | P1 | — | ✓ | TC-MAN-08 | — | — |
-| Double confirm | REQ-CHK-02 | P0 | — | ✓ | TC-MAN-07 | TC-UI-05 | — |
-| Invoice verify | REQ-INV-01 | P0 | — | ✓ | TC-MAN-06 | TC-UI-05 | TC-API-05 |
+| Double confirm | REQ-CHK-02 | P0 | ✓ | ✓ | TC-MAN-07 | TC-UI-04, 08 | — |
+| Invoice verify | REQ-INV-01 | P0 | ✓ | — | TC-MAN-06 | TC-UI-04 | TC-API-04 |
 
 ---
 
@@ -228,9 +228,9 @@ Low        —        —      Register  —
 
 ## Recommended test execution order
 
-1. **Smoke (3 UI + 3 API)** — SUT up, auth works, catalog reachable  
-2. **Regression E2E (TC-UI-05)** — Full purchase + double confirm + invoice  
-3. **Regression auth/profile/register** — TC-UI-04, 06, 07 + API counterparts  
+1. **Smoke (4 UI + 3 API)** — SUT up, auth works, catalog reachable, E2E purchase path  
+2. **Regression UI (TC-UI-05–08)** — Invalid login, profile, empty search, single confirm  
+3. **Regression API (TC-API-04–08)** — Full lifecycle, auth negatives, invalid IDs, validation  
 4. **Manual negative/edge** — TC-MAN-07, TC-MAN-08  
 
 ---

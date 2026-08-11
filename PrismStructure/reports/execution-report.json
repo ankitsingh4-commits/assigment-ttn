@@ -3,9 +3,7 @@
     "argv": [
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\node_modules\\@playwright\\test\\cli.js",
-      "test",
-      "--grep",
-      "@smoke"
+      "test"
     ],
     "configFile": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\playwright.config.js",
     "rootDir": "C:/Users/Ankit Singh/Projects/assigment-ttn/PrismStructure/tests",
@@ -74,6 +72,203 @@
   },
   "suites": [
     {
+      "title": "api\\regression.spec.js",
+      "file": "api/regression.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Regression",
+          "file": "api/regression.spec.js",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "@regression TC-API-04 Full auth cart and invoice lifecycle",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6678,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:06.128Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5efe4093abaf6fff4f14-b2f743b55ec778e5d6e0",
+              "file": "api/regression.spec.js",
+              "line": 20,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-API-05 Invalid login is rejected with unauthorized response",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1955,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:12.862Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5efe4093abaf6fff4f14-4bcc59b71b9fc6c3a181",
+              "file": "api/regression.spec.js",
+              "line": 84,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-API-06 Invoice creation rejects missing and invalid bearer tokens",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2883,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:14.830Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5efe4093abaf6fff4f14-a24d09921e59557c9290",
+              "file": "api/regression.spec.js",
+              "line": 101,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-API-07 Invalid cart and product IDs return not found",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4820,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:17.727Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5efe4093abaf6fff4f14-74c19f5e4527aebee11f",
+              "file": "api/regression.spec.js",
+              "line": 126,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-API-08 Invoice with missing required fields returns validation errors",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1769,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:22.564Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5efe4093abaf6fff4f14-f4fa72ccc9daea19167c",
+              "file": "api/regression.spec.js",
+              "line": 169,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "api\\smoke.spec.js",
       "file": "api/smoke.spec.js",
       "column": 0,
@@ -104,12 +299,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 711,
+                      "duration": 674,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:17:33.367Z",
+                      "startTime": "2026-08-11T12:55:24.364Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -140,12 +335,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1367,
+                      "duration": 1365,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:17:34.140Z",
+                      "startTime": "2026-08-11T12:55:25.053Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,12 +371,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1975,
+                      "duration": 1802,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:17:35.529Z",
+                      "startTime": "2026-08-11T12:55:26.437Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -192,6 +387,167 @@
               "id": "3b95780aae95a72f9c91-38808883fa8e2a8497b7",
               "file": "api/smoke.spec.js",
               "line": 34,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ui\\regression.spec.js",
+      "file": "ui/regression.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UI Regression",
+          "file": "ui/regression.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "@regression TC-UI-05 Invalid login shows error and keeps user signed out",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4729,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:28.276Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90c806185fd078f920b1-cd4942a7159682d7c4bf",
+              "file": "ui/regression.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-UI-06 Profile shows registered user details",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7303,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:33.223Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90c806185fd078f920b1-afbadb17747f0ebb2c8e",
+              "file": "ui/regression.spec.js",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-UI-07 Search with no matches shows empty results",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4847,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:40.556Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90c806185fd078f920b1-db0d4aa7d442e7940166",
+              "file": "ui/regression.spec.js",
+              "line": 42,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-UI-08 Single checkout confirm does not complete order",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14256,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T12:55:45.431Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "90c806185fd078f920b1-e43005a47d0d0a6f3cf2",
+              "file": "ui/regression.spec.js",
+              "line": 54,
               "column": 3
             }
           ]
@@ -229,12 +585,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8101,
+                      "duration": 10500,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:17:37.590Z",
+                      "startTime": "2026-08-11T12:55:59.743Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -265,12 +621,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8991,
+                      "duration": 7037,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:17:46.061Z",
+                      "startTime": "2026-08-11T12:56:10.270Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -301,12 +657,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6772,
+                      "duration": 6748,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:17:55.090Z",
+                      "startTime": "2026-08-11T12:56:17.333Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -337,12 +693,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 28942,
+                      "duration": 26470,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-11T12:18:01.906Z",
+                      "startTime": "2026-08-11T12:56:24.105Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -362,9 +718,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-11T12:17:31.824Z",
-    "duration": 59511.579,
-    "expected": 7,
+    "startTime": "2026-08-11T12:55:05.214Z",
+    "duration": 106103.633,
+    "expected": 16,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

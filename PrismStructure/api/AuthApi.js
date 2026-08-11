@@ -12,8 +12,8 @@ class AuthApi {
     return { response, body };
   }
 
-  async register(email) {
-    const payload = registerPayload(email);
+  async register(email, password, overrides = {}) {
+    const payload = registerPayload(email, password, overrides);
     const response = await this.client.post('/users/register', payload);
     return { response, payload };
   }

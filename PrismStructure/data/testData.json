@@ -8,6 +8,16 @@
     "lastName": "Tester",
     "password": "Welcome01!"
   },
+  "uiRegister": {
+    "dob": "1990-05-15",
+    "country": "United States of America (the)",
+    "postalCode": "1234AA",
+    "houseNumber": "42",
+    "street": "Zoey Shore",
+    "city": "Hesselbury",
+    "state": "Florida",
+    "phone": "5551234567"
+  },
   "invalidCredentials": {
     "wrongPassword": "WrongPass123!"
   },

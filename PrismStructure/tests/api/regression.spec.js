@@ -17,19 +17,18 @@ test.describe('API Regression', () => {
   });
 
   test('@regression TC-API-05 Full auth cart and invoice lifecycle', async ({ request }) => {
-    const { apiRegister } = getTestData();
     const authApi = new AuthApi(request);
     const productApi = new ProductApi(request);
     const cartApi = new CartApi(request);
     const invoiceApi = new InvoiceApi(request);
 
     const email = uniqueEmail('flow');
-    const { response: regRes } = await authApi.register(email);
+    const { response: regRes, payload } = await authApi.register(email);
     expect(regRes.status()).toBe(201);
 
     const { response: loginRes, body: loginBody } = await authApi.login(
       email,
-      apiRegister.password,
+      payload.password,
     );
     expect(loginRes.status()).toBe(200);
     const token = loginBody.access_token;

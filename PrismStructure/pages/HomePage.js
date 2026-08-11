@@ -14,11 +14,11 @@ class HomePage extends BasePage {
   }
 
   async openSignIn() {
-    await this.signInLink.click();
+    await this.page.goto('/auth/login', { waitUntil: 'domcontentloaded' });
   }
 
   async openRegister() {
-    await this.registerLink.click();
+    await this.page.goto('/auth/register', { waitUntil: 'domcontentloaded' });
   }
 }
 

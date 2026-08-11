@@ -4,11 +4,11 @@ class LoginPage {
   }
 
   get emailInput() {
-    return this.page.getByLabel('Email');
+    return this.page.getByLabel('Email address *');
   }
 
   get passwordInput() {
-    return this.page.getByLabel('Password');
+    return this.page.getByLabel('Password *', { exact: true });
   }
 
   get submitButton() {

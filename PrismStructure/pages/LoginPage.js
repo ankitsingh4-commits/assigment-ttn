@@ -3,26 +3,26 @@ class LoginPage {
     this.page = page;
   }
 
-  get email() {
-    return this.page.locator('[data-test="email"]');
+  get emailInput() {
+    return this.page.getByLabel('Email');
   }
 
-  get password() {
-    return this.page.locator('[data-test="password"]');
+  get passwordInput() {
+    return this.page.getByLabel('Password');
   }
 
-  get submit() {
-    return this.page.locator('[data-test="login-submit"]');
+  get submitButton() {
+    return this.page.getByRole('button', { name: 'Login' });
   }
 
   get errorAlert() {
-    return this.page.locator('[data-test="login-error"]');
+    return this.page.getByRole('alert');
   }
 
   async login(email, password) {
-    await this.email.fill(email);
-    await this.password.fill(password);
-    await this.submit.click();
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.submitButton.click();
   }
 }
 

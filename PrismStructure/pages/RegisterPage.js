@@ -3,31 +3,31 @@ class RegisterPage {
     this.page = page;
   }
 
-  get firstName() {
-    return this.page.locator('[data-test="first-name"]');
+  get firstNameInput() {
+    return this.page.getByLabel('First name');
   }
 
-  get lastName() {
-    return this.page.locator('[data-test="last-name"]');
+  get lastNameInput() {
+    return this.page.getByLabel('Last name');
   }
 
-  get email() {
-    return this.page.locator('[data-test="email"]');
+  get emailInput() {
+    return this.page.getByLabel('Email');
   }
 
-  get password() {
-    return this.page.locator('[data-test="password"]');
+  get passwordInput() {
+    return this.page.getByLabel('Password');
   }
 
   get registerButton() {
-    return this.page.locator('[data-test="register-submit"]');
+    return this.page.getByRole('button', { name: 'Register' });
   }
 
   async register(firstName, lastName, email, password) {
-    await this.firstName.fill(firstName);
-    await this.lastName.fill(lastName);
-    await this.email.fill(email);
-    await this.password.fill(password);
+    await this.firstNameInput.fill(firstName);
+    await this.lastNameInput.fill(lastName);
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
     await this.registerButton.click();
   }
 }

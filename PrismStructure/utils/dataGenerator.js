@@ -23,8 +23,22 @@ function invoicePayload(cartId) {
   };
 }
 
+function uniqueRegisterUser() {
+  const stamp = Date.now();
+  const rand = Math.floor(Math.random() * 10000);
+  const { registerUser } = getTestData();
+
+  return {
+    firstName: `Auto${rand}`,
+    lastName: `Tester${stamp % 10000}`,
+    email: uniqueEmail('uireg'),
+    password: registerUser.password,
+  };
+}
+
 module.exports = {
   uniqueEmail,
+  uniqueRegisterUser,
   registerPayload,
   invoicePayload,
 };

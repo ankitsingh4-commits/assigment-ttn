@@ -33,8 +33,11 @@ class NavBar {
   }
 
   async openMyProfile() {
-    await this.profileMenu.click();
-    await this.myProfileLink.click();
+    await this.page.goto('/account/profile', { waitUntil: 'domcontentloaded' });
+    const profileTab = this.page.getByRole('button', { name: 'Profile', exact: true });
+    if (await profileTab.isVisible()) {
+      await profileTab.click();
+    }
   }
 
   async signOut() {

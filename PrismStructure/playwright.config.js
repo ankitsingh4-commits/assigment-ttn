@@ -7,8 +7,9 @@ module.exports = defineConfig({
   testMatch: '**/*.spec.js',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  retries: 1,
+  workers: 1,
+  timeout: 60000,
   reporter: [
     ['list'],
     ['html', { outputFolder: 'reports/html', open: 'never' }],

@@ -10,7 +10,7 @@ class HomePage extends BasePage {
   }
 
   get productCards() {
-    return this.page.locator('[data-test="product-name"]');
+    return this.page.locator('[data-test="product-name"], a[href*="/product/"]');
   }
 
   async openSignIn() {

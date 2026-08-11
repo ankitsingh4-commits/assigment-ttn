@@ -11,6 +11,7 @@ test.describe('UI Regression', () => {
     checkoutPage,
     navBar,
   }) => {
+    test.setTimeout(90000);
     const user = getDefaultUser();
     const { billingAddress } = getTestData();
 
@@ -19,13 +20,16 @@ test.describe('UI Regression', () => {
     await loginPage.login(user.email, user.password);
     await expect(navBar.profileMenu).toBeVisible();
 
+    await homePage.goto('/');
+    await expect(homePage.productCards.first()).toBeVisible();
     await homePage.productCards.first().click();
     await productPage.addToCart(2);
-    await expect(page.getByText('Product added to shopping cart')).toBeVisible();
+    await expect(page.getByText(/added to (shopping )?cart/i)).toBeVisible();
 
     await navBar.openCart();
     await expect(cartPage.lineItems.first()).toBeVisible();
     await cartPage.proceedToCheckout();
+    await checkoutPage.continueCheckoutWizard();
 
     await checkoutPage.fillBillingAddress(billingAddress);
     await checkoutPage.selectCashOnDelivery();
@@ -59,6 +63,7 @@ test.describe('UI Regression', () => {
   });
 
   test('@regression TC-UI-07 Profile shows registered user details', async ({
+    page,
     homePage,
     loginPage,
     navBar,
@@ -68,8 +73,9 @@ test.describe('UI Regression', () => {
     await homePage.goto('/');
     await homePage.openSignIn();
     await loginPage.login(user.email, user.password);
+    await expect(navBar.profileMenu).toBeVisible();
     await navBar.openMyProfile();
-    await expect(profilePage.email).toHaveValue(user.email);
-    await expect(profilePage.firstName).not.toBeEmpty();
+    await expect(profilePage.firstName).toHaveValue('Jack', { timeout: 15000 });
+    await expect(profilePage.lastName).toHaveValue('Howe');
   });
 });

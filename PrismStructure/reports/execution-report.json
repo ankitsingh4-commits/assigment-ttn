@@ -1,48 +1,382 @@
 {
-  "project": "assigment-ttn",
-  "framework": "Playwright + TypeScript",
-  "generatedAt": "2026-08-10",
-  "note": "Run `npm test` in PrismStructure after installing Node.js to refresh this report with live results.",
-  "summary": {
-    "total": 14,
-    "passed": 14,
-    "failed": 0,
-    "skipped": 0
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/ui/regression.spec.js",
+      "--grep",
+      "TC-UI-05|TC-UI-07"
+    ],
+    "configFile": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\playwright.config.js",
+    "rootDir": "C:/Users/Ankit Singh/Projects/assigment-ttn/PrismStructure/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Ankit Singh/Projects/assigment-ttn/PrismStructure/reports/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Ankit Singh/Projects/assigment-ttn/PrismStructure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "reports/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/execution-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
   },
   "suites": [
     {
-      "name": "UI Smoke",
-      "tests": [
-        { "id": "TC-UI-01", "title": "Homepage displays product catalog", "tag": "@smoke", "status": "passed" },
-        { "id": "TC-UI-02", "title": "User can login with valid credentials", "tag": "@smoke", "status": "passed" },
-        { "id": "TC-UI-03", "title": "Product detail page loads from home", "tag": "@smoke", "status": "passed" }
-      ]
-    },
-    {
-      "name": "UI Regression",
-      "tests": [
-        { "id": "TC-UI-04", "title": "User registration with valid details", "tag": "@regression", "status": "passed" },
-        { "id": "TC-UI-05", "title": "End-to-end COD purchase and invoice", "tag": "@regression", "status": "passed" },
-        { "id": "TC-UI-06", "title": "Login fails with invalid password", "tag": "@regression", "status": "passed" },
-        { "id": "TC-UI-07", "title": "Profile shows registered user details", "tag": "@regression", "status": "passed" }
-      ]
-    },
-    {
-      "name": "API Smoke",
-      "tests": [
-        { "id": "TC-API-01", "title": "List products returns success", "tag": "@smoke", "status": "passed" },
-        { "id": "TC-API-02", "title": "Login returns access token", "tag": "@smoke", "status": "passed" },
-        { "id": "TC-API-03", "title": "Create cart returns cart id", "tag": "@smoke", "status": "passed" }
-      ]
-    },
-    {
-      "name": "API Regression",
-      "tests": [
-        { "id": "TC-API-04", "title": "Register new user via API", "tag": "@regression", "status": "passed" },
-        { "id": "TC-API-05", "title": "Full auth cart and invoice lifecycle", "tag": "@regression", "status": "passed" },
-        { "id": "TC-API-06", "title": "Login with wrong password is rejected", "tag": "@regression", "status": "passed" },
-        { "id": "TC-API-07", "title": "Product search returns matching results", "tag": "@regression", "status": "passed" }
+      "title": "ui\\regression.spec.js",
+      "file": "ui/regression.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UI Regression",
+          "file": "ui/regression.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "@regression TC-UI-05 End-to-end COD purchase and invoice",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 29535,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-test=\"proceed-2\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" awnextstep=\"\" data-test=\"proceed-2\" class=\"btn btn-success\"> Proceed to checkout </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-test=\"proceed-2\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" awnextstep=\"\" data-test=\"proceed-2\" class=\"btn btn-success\"> Proceed to checkout </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at CheckoutPage.fillBillingAddress (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js:81:30)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:34:5",
+                        "location": {
+                          "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js",
+                          "column": 30,
+                          "line": 81
+                        },
+                        "snippet": "   at ..\\pages\\CheckoutPage.js:81\n\n  79 |     }\n  80 |\n> 81 |     await this.proceedButton.click();\n     |                              ^\n  82 |   }\n  83 |\n  84 |   async goToPaymentStep() {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js",
+                            "column": 30,
+                            "line": 81
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-test=\"proceed-2\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" awnextstep=\"\" data-test=\"proceed-2\" class=\"btn btn-success\"> Proceed to checkout </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ..\\pages\\CheckoutPage.js:81\n\n  79 |     }\n  80 |\n> 81 |     await this.proceedButton.click();\n     |                              ^\n  82 |   }\n  83 |\n  84 |   async goToPaymentStep() {\n    at CheckoutPage.fillBillingAddress (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js:81:30)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:34:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T09:31:30.779Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js",
+                        "column": 30,
+                        "line": 81
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 33736,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-test=\"proceed-2\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" awnextstep=\"\" data-test=\"proceed-2\" class=\"btn btn-success\"> Proceed to checkout </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-test=\"proceed-2\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" awnextstep=\"\" data-test=\"proceed-2\" class=\"btn btn-success\"> Proceed to checkout </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at CheckoutPage.fillBillingAddress (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js:81:30)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:34:5",
+                        "location": {
+                          "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js",
+                          "column": 30,
+                          "line": 81
+                        },
+                        "snippet": "   at ..\\pages\\CheckoutPage.js:81\n\n  79 |     }\n  80 |\n> 81 |     await this.proceedButton.click();\n     |                              ^\n  82 |   }\n  83 |\n  84 |   async goToPaymentStep() {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js",
+                            "column": 30,
+                            "line": 81
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-test=\"proceed-2\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" awnextstep=\"\" data-test=\"proceed-2\" class=\"btn btn-success\"> Proceed to checkout </button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ..\\pages\\CheckoutPage.js:81\n\n  79 |     }\n  80 |\n> 81 |     await this.proceedButton.click();\n     |                              ^\n  82 |   }\n  83 |\n  84 |   async goToPaymentStep() {\n    at CheckoutPage.fillBillingAddress (C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js:81:30)\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:34:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-08-11T09:32:03.069Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium-retry1\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium-retry1\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium-retry1\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-2a65b-nd-COD-purchase-and-invoice-chromium-retry1\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\pages\\CheckoutPage.js",
+                        "column": 30,
+                        "line": 81
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "90c806185fd078f920b1-94d08b7c32ca6f757cea",
+              "file": "ui/regression.spec.js",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "@regression TC-UI-07 Profile shows registered user details",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 11556,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Profile' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Profile' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Profile' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Profile' })\u001b[22m\n\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:77:66",
+                        "location": {
+                          "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js",
+                          "column": 66,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     await loginPage.login(user.email, user.password);\n  76 |     await navBar.openMyProfile();\n> 77 |     await expect(page.getByRole('heading', { name: 'Profile' })).toBeVisible();\n     |                                                                  ^\n  78 |     await expect(profilePage.firstName).not.toBeEmpty();\n  79 |     await expect(profilePage.email).toHaveValue(user.email, { timeout: 15000 });\n  80 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js",
+                            "column": 66,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Profile' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Profile' })\u001b[22m\n\n\n  75 |     await loginPage.login(user.email, user.password);\n  76 |     await navBar.openMyProfile();\n> 77 |     await expect(page.getByRole('heading', { name: 'Profile' })).toBeVisible();\n     |                                                                  ^\n  78 |     await expect(profilePage.firstName).not.toBeEmpty();\n  79 |     await expect(profilePage.email).toHaveValue(user.email, { timeout: 15000 });\n  80 |   });\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:77:66"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-11T09:32:42.379Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js",
+                        "column": 66,
+                        "line": 77
+                      }
+                    },
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10932,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Profile' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Profile' })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Profile' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Profile' })\u001b[22m\n\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:77:66",
+                        "location": {
+                          "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js",
+                          "column": 66,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     await loginPage.login(user.email, user.password);\n  76 |     await navBar.openMyProfile();\n> 77 |     await expect(page.getByRole('heading', { name: 'Profile' })).toBeVisible();\n     |                                                                  ^\n  78 |     await expect(profilePage.firstName).not.toBeEmpty();\n  79 |     await expect(profilePage.email).toHaveValue(user.email, { timeout: 15000 });\n  80 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js",
+                            "column": 66,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Profile' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Profile' })\u001b[22m\n\n\n  75 |     await loginPage.login(user.email, user.password);\n  76 |     await navBar.openMyProfile();\n> 77 |     await expect(page.getByRole('heading', { name: 'Profile' })).toBeVisible();\n     |                                                                  ^\n  78 |     await expect(profilePage.firstName).not.toBeEmpty();\n  79 |     await expect(profilePage.email).toHaveValue(user.email, { timeout: 15000 });\n  80 |   });\n    at C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js:77:66"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-08-11T09:32:56.545Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium-retry1\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium-retry1\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium-retry1\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\reports\\test-results\\ui-regression-UI-Regressio-99c34-ows-registered-user-details-chromium-retry1\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Ankit Singh\\Projects\\assigment-ttn\\PrismStructure\\tests\\ui\\regression.spec.js",
+                        "column": 66,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "90c806185fd078f920b1-eedef38a459facba5d42",
+              "file": "ui/regression.spec.js",
+              "line": 65,
+              "column": 3
+            }
+          ]
+        }
       ]
     }
-  ]
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-11T09:31:29.625Z",
+    "duration": 99318.206,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
 }

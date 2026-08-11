@@ -3,12 +3,16 @@ class ProfilePage {
     this.page = page;
   }
 
-  get email() {
-    return this.page.locator('[data-test="email"]');
+  get firstName() {
+    return this.page.getByLabel('First name');
   }
 
-  get firstName() {
-    return this.page.locator('[data-test="first-name"]');
+  get lastName() {
+    return this.page.getByLabel('Last name');
+  }
+
+  get email() {
+    return this.page.getByLabel('Email address');
   }
 }
 

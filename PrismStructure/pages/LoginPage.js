@@ -16,7 +16,7 @@ class LoginPage {
   }
 
   get errorAlert() {
-    return this.page.getByRole('alert');
+    return this.page.getByText(/invalid email or password/i);
   }
 
   async login(email, password) {

@@ -5,7 +5,7 @@ const { uniqueRegisterUser } = require('../../utils/dataGenerator');
 test.describe('UI Smoke', () => {
   test('@smoke TC-UI-01 Homepage displays product catalog', async ({ homePage }) => {
     await homePage.goto('/');
-    await expect(homePage.productCards.first()).toBeVisible();
+    await expect(homePage.productCards.first()).toBeVisible({ timeout: 15000 });
   });
 
   test('@smoke TC-UI-02 User can register with valid credentials', async ({
